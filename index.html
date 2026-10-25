@@ -2,381 +2,1688 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BILAL SIR VIP 👑 | WinGo 1M Pattern Viewer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#03070b">
+<meta name="description" content="BILAL SIR VIP — 3D Cyber Command Center and WinGo 1M data viewer">
+<title>BILAL SIR VIP 👑 | Cyber Command Center</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--card:rgba(10,10,16,.82);--red:#ff1744;--cyan:#00f2fe;--green:#00ff88;--gold:#ffd700;--purple:#c084fc;--dim:#cbd5e1;--mute:#94a3b8;
---cy:'Orbitron',system-ui,sans-serif;--te:'Rajdhani',system-ui,sans-serif;--mo:'JetBrains Mono',monospace}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:#050307;font-family:var(--te);color:#fff;min-height:100vh;display:flex;justify-content:center;padding:10px 10px 30px;overflow-x:hidden}
-.bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;pointer-events:none;opacity:.7}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
-button{font:inherit;color:inherit}
-.app{width:100%;max-width:460px;display:flex;flex-direction:column;gap:10px}
-.panel{display:none;flex-direction:column;gap:10px}.panel.on{display:flex}
-.box{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,23,68,.4);border-top-color:rgba(0,242,254,.5);border-radius:16px;padding:14px}
-.head{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.brand{font-family:var(--cy);font-weight:900;font-size:14px;letter-spacing:1.5px;color:var(--gold);text-shadow:0 0 12px rgba(255,215,0,.4)}
-.brand b{color:var(--red)}
-.pill{font-family:var(--cy);font-size:9px;font-weight:700;padding:5px 10px;border-radius:20px;border:1px solid;letter-spacing:.8px;white-space:nowrap}
-.st-LIVE{color:var(--green);border-color:var(--green)}.st-STALE{color:var(--gold);border-color:var(--gold)}.st-OFFLINE{color:var(--red);border-color:var(--red)}.st-CONNECTING{color:var(--mute);border-color:var(--mute)}
-.row{display:flex;gap:8px}
-.period{flex:1;display:flex;align-items:center;justify-content:space-between;font-family:var(--mo);font-size:11px;color:var(--green);min-width:0}
-.period small{font-family:var(--cy);color:var(--gold);font-size:9px;margin-right:6px}
-.period span{overflow:hidden;text-overflow:ellipsis}
-.icon-btn{background:none;border:0;cursor:pointer;font-size:15px;padding:6px;min-width:36px;min-height:36px}
-.timer{font-family:var(--cy);font-size:18px;font-weight:900;color:var(--green);display:flex;align-items:center;gap:5px}
-.timer small{font-family:var(--mo);font-size:9px;color:var(--dim)}
-.ttl{font-family:var(--cy);font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1.5px;text-align:center}
-.big{font-family:var(--cy);font-weight:900;font-size:40px;letter-spacing:3px;text-align:center;margin:8px 0}
-.big.BIG{color:var(--cyan);text-shadow:0 0 24px rgba(0,242,254,.5)}.big.SMALL{color:var(--purple);text-shadow:0 0 24px rgba(192,132,252,.5)}.big.WAIT{color:var(--gold);font-size:28px}
-.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
-.tag{font-size:11px;font-weight:600;color:var(--dim);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:3px 12px}
-.tag.dragon{color:var(--red);border-color:var(--red)}.tag.zig{color:var(--cyan);border-color:var(--cyan)}
-.meter{display:flex;align-items:center;gap:10px;font-family:var(--mo);font-size:10px;color:var(--mute);margin-top:6px}
-.meter i{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
-.meter i b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan),var(--green));transition:width .5s}
-.note{font-size:11px;color:var(--mute);text-align:center;line-height:1.4;margin-top:10px}
-.scroll{max-height:480px;overflow-y:auto}
-table{width:100%;border-collapse:collapse;text-align:center;font-family:var(--mo);font-size:11.5px;font-weight:700}
-th{font-size:9.5px;color:var(--mute);padding:8px 4px;border-bottom:1px solid rgba(255,255,255,.12);position:sticky;top:0;background:#0b0a10}
-td{padding:10px 4px;border-bottom:1px solid rgba(255,255,255,.06)}
-.BIG-t{color:var(--gold)}.SMALL-t{color:var(--cyan)}.WIN{color:var(--green)}.LOSS{color:var(--red)}.JACKPOT{color:var(--gold)}.PENDING{color:var(--mute)}
-.empty{padding:30px 10px;text-align:center;color:var(--mute);font-size:13px}
-.sum{display:flex;justify-content:space-around;margin-top:10px;padding:10px 4px;border:1px solid rgba(255,255,255,.12);border-radius:12px;font-family:var(--cy);font-size:10px;font-weight:700}
-.tabs{position:sticky;top:6px;z-index:50;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:5px;background:rgba(8,8,12,.92);backdrop-filter:blur(16px);border:1px solid rgba(255,215,0,.35);border-radius:16px}
-.tb{background:none;border:0;border-radius:11px;color:var(--mute);font-family:var(--cy);font-size:9px;font-weight:700;letter-spacing:.5px;min-height:42px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-.tb span:first-child{font-size:15px}.tb.on{background:linear-gradient(135deg,rgba(255,23,68,.35),rgba(255,215,0,.2));color:var(--gold)}
-.hero{display:flex;gap:14px;align-items:center}
-.ring{position:relative;width:74px;height:74px;flex:none}
-.ring svg{transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:6}
-.ring .bgc{stroke:rgba(255,255,255,.1)}.ring .fg{stroke:var(--green);stroke-linecap:round;transition:stroke-dashoffset 1s linear}
-.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--cy);font-size:18px;color:var(--green)}
-.hero .big{margin:0;text-align:left;flex:1;font-size:36px}
-.st{display:flex;flex-direction:column;gap:3px;font-size:13px;margin-top:8px}
-.st div{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);padding:4px 0}
-.tg{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:10px;padding:12px;border:1px solid rgba(0,200,255,.3);border-radius:14px}
-.tg a{color:#00d4ff;font-family:var(--mo);font-size:12px;padding:6px 14px}
-#rp{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.65)}
-#rp div{width:100%;max-width:340px;background:#fff;color:#111;border-radius:22px;padding:24px 20px;text-align:center;display:flex;flex-direction:column;gap:10px}
-#rp h3{font-size:20px}#rp p{color:#555;font-size:14px}#rp button{border:0;border-radius:12px;padding:13px;font-weight:700;cursor:pointer}
-#rp .go{background:#229ed9;color:#fff}#rp .x{background:#eee;color:#444}
-.bars{display:flex;gap:4px;align-items:flex-end;height:90px;margin-top:10px}
-.bar{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-family:var(--mo);font-size:9px;color:var(--mute)}
-.bar i{width:100%;background:linear-gradient(var(--cyan),var(--purple));border-radius:3px 3px 0 0;min-height:2px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
-.grid label{font-size:11px;color:var(--mute);display:flex;flex-direction:column;gap:4px}
-.grid input{height:40px;border-radius:10px;border:1px solid rgba(0,242,254,.4);background:#000;color:var(--cyan);font-family:var(--mo);text-align:center;width:100%}
-.exp{width:100%;height:44px;border-radius:12px;border:1px solid var(--cyan);background:rgba(0,242,254,.1);color:var(--cyan);font-family:var(--cy);font-size:11px;font-weight:700;cursor:pointer}
-td.l{text-align:left;padding-left:6px;font-family:var(--te);font-size:12px}
-@media (prefers-reduced-motion:reduce){.bg-video{display:none}*{transition:none!important;animation:none!important}}
-@media (max-width:380px){.big{font-size:32px}}
+:root{
+  color-scheme:dark;
+  --bg:#03070b;
+  --panel:rgba(5,16,22,.83);
+  --panel2:rgba(8,25,31,.72);
+  --cyan:#00eaff;
+  --green:#00ff9c;
+  --red:#ff355e;
+  --gold:#ffd76a;
+  --purple:#a78bfa;
+  --text:#e4fbff;
+  --muted:#77939f;
+  --line:rgba(0,234,255,.19);
+  --cy:'Orbitron',system-ui,sans-serif;
+  --te:'Rajdhani',system-ui,sans-serif;
+  --mo:'JetBrains Mono',monospace;
+  --motion:1;
+}
+*{box-sizing:border-box}
+html{min-height:100%;scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;overflow-x:hidden;
+  background:var(--bg);color:var(--text);
+  font-family:var(--te);font-size:15px;
+}
+button,input,select{font:inherit}
+button{color:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{
+  outline:2px solid var(--cyan);outline-offset:4px
+}
+button:disabled{opacity:.4;cursor:not-allowed}
+button,a{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+::selection{background:var(--cyan);color:#001014}
+
+#world{
+  position:fixed;inset:0;z-index:0;overflow:hidden;
+  pointer-events:none;background:
+    radial-gradient(ellipse at 50% 43%,rgba(0,100,100,.13),transparent 48%),
+    radial-gradient(ellipse at 12% 90%,rgba(0,255,156,.05),transparent 40%),
+    #03070b;
+}
+#world canvas{display:block;width:100%;height:100%}
+#world .fallback{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,234,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.045) 1px,transparent 1px);
+  background-size:44px 44px;
+  transform:perspective(500px) rotateX(52deg) scale(1.8);
+  transform-origin:50% 80%;
+  mask-image:linear-gradient(transparent,black 35%,black 75%,transparent);
+}
+#world .fallback[hidden]{display:none}
+
+.ambient{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.15),transparent 25%,transparent 75%,rgba(0,0,0,.48));
+}
+.scanlines{
+  position:fixed;inset:0;z-index:20;pointer-events:none;opacity:.10;
+  background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(0,234,255,.10) 4px);
+}
+.app{
+  position:relative;z-index:2;width:min(1120px,100%);
+  margin:auto;padding:18px 18px 36px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-top-color:rgba(0,234,255,.42);
+  box-shadow:0 12px 45px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.025);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+  min-width:0;
+}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 17px;border-radius:5px 18px 5px 18px;
+}
+.brand{
+  font:800 clamp(13px,2.2vw,19px)/1.3 var(--cy);
+  letter-spacing:1.5px;color:var(--gold);
+  text-shadow:0 0 24px rgba(255,215,106,.17)
+}
+.brand em{font-style:normal;color:var(--cyan)}
+.eyebrow{
+  color:var(--muted);font:10px var(--mo);
+  letter-spacing:2px;text-transform:uppercase
+}
+.status{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid currentColor;border-radius:3px;
+  padding:7px 10px;font:700 10px var(--mo);letter-spacing:1px;
+  white-space:nowrap;
+}
+.status:before{
+  content:"";width:7px;height:7px;border-radius:50%;background:currentColor;
+  box-shadow:0 0 10px currentColor;
+}
+.LIVE{color:var(--green)!important}
+.STALE{color:var(--gold)!important}
+.OFFLINE{color:var(--red)!important}
+.CONNECTING{color:var(--muted)!important}
+.header-actions{display:flex;align-items:center;gap:7px}
+.icon-btn,.secondary,.primary,.navbtn{
+  border:1px solid var(--line);background:rgba(0,234,255,.045);
+  padding:9px 12px;cursor:pointer;transition:
+  background .2s,border-color .2s,transform .2s,color .2s;
+}
+.icon-btn:hover,.secondary:hover,.navbtn:hover{
+  background:rgba(0,234,255,.12);border-color:var(--cyan)
+}
+.primary{
+  background:rgba(0,255,156,.09);border-color:rgba(0,255,156,.55);
+  color:var(--green);font:700 11px var(--cy);letter-spacing:1px
+}
+.primary:hover{background:rgba(0,255,156,.18);transform:translateY(-1px)}
+.icon-btn{font-size:15px;min-width:38px;min-height:38px}
+.nav{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;
+  padding:7px;border-radius:4px 14px 4px 14px;
+  background:rgba(3,11,16,.91);border:1px solid var(--line);
+}
+.navbtn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;border-radius:3px;color:var(--muted);
+  font:700 10px var(--cy);letter-spacing:.5px
+}
+.navbtn .ni{font-size:17px}
+.navbtn.active{
+  color:var(--green);border-color:rgba(0,255,156,.6);
+  background:linear-gradient(110deg,rgba(0,255,156,.10),rgba(0,234,255,.07));
+  box-shadow:inset 0 -2px var(--green),0 0 22px rgba(0,255,156,.05)
+}
+.view{display:none;flex-direction:column;gap:14px;min-width:0}
+.view.active{display:flex;animation:appear .35s ease both}
+@keyframes appear{
+  from{opacity:0;transform:perspective(900px) translateY(10px) rotateX(1deg)}
+  to{opacity:1;transform:perspective(900px) translateY(0) rotateX(0)}
+}
+.card{
+  padding:19px;border-radius:4px 16px 4px 16px;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  transform-style:preserve-3d;
+}
+.card:hover{
+  border-color:rgba(0,234,255,.43);
+  box-shadow:0 16px 45px rgba(0,0,0,.25),0 0 18px rgba(0,234,255,.025);
+}
+.card-title{
+  font:700 11px var(--cy);letter-spacing:1.7px;color:var(--cyan);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-bottom:13px;margin-bottom:13px;
+  border-bottom:1px solid rgba(0,234,255,.12)
+}
+.muted{color:var(--muted)}
+.mono{font-family:var(--mo)}
+.small{font-size:11px}
+.note{font-size:12px;color:var(--muted);line-height:1.65}
+.center{text-align:center}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  padding:22px;min-height:370px;
+  background:
+    radial-gradient(ellipse at 50% 35%,rgba(0,90,100,.17),transparent 50%),
+    linear-gradient(145deg,rgba(5,20,26,.91),rgba(2,8,12,.94));
+}
+.hero:after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent 0 32px,rgba(0,234,255,.018) 33px);
+}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.chip{
+  font:9px var(--mo);letter-spacing:1px;color:var(--muted);
+  padding:6px 8px;border:1px solid rgba(255,255,255,.09)
+}
+.signal-zone{
+  display:grid;grid-template-columns:minmax(0,1fr) 160px;
+  align-items:center;gap:12px;margin:10px 0 18px;min-height:190px;
+}
+.signal-main{text-align:center;min-width:0}
+.signal{
+  font:900 clamp(35px,8vw,65px)/1.15 var(--cy);
+  letter-spacing:2px;margin:0;
+  color:var(--gold);text-shadow:0 0 30px rgba(255,215,106,.18);
+  overflow-wrap:anywhere;
+}
+.signal.BIG{color:var(--cyan);text-shadow:0 0 32px rgba(0,234,255,.30)}
+.signal.SMALL{color:var(--purple);text-shadow:0 0 32px rgba(167,139,250,.30)}
+.signal.WAIT{color:var(--gold)}
+.signal-sub{margin-top:9px;font:10px var(--mo);color:var(--muted);letter-spacing:1px}
+.reactor{
+  width:150px;height:150px;position:relative;justify-self:center;
+  perspective:500px;
+}
+.reactor .r{
+  position:absolute;inset:8%;border:1px solid rgba(0,234,255,.65);
+  border-radius:50%;box-shadow:0 0 17px rgba(0,234,255,.07),inset 0 0 15px rgba(0,234,255,.04);
+}
+.reactor .r:nth-child(1){transform:rotateX(68deg);animation:spin 12s linear infinite}
+.reactor .r:nth-child(2){transform:rotateY(68deg);border-color:rgba(0,255,156,.65);animation:spin 9s linear infinite reverse}
+.reactor .r:nth-child(3){inset:22%;transform:rotateX(55deg) rotateY(35deg);border-color:var(--gold);animation:spin 6s linear infinite}
+.reactor .r:nth-child(4){inset:35%;background:radial-gradient(circle,rgba(0,255,156,.32),rgba(0,234,255,.08) 40%,transparent 70%);border-color:rgba(0,255,156,.8);animation:pulse 2.5s ease-in-out infinite}
+.reactor .r:nth-child(5){inset:0;border-style:dashed;border-color:rgba(0,234,255,.23);animation:spin 30s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+@keyframes pulse{50%{scale:1.12;filter:brightness(1.6)}}
+.periodline{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)
+}
+.period-number{font:12px var(--mo);color:var(--green);overflow-wrap:anywhere}
+.timerbox{display:flex;align-items:center;gap:9px}
+.timer{
+  font:700 22px var(--cy);color:var(--green);min-width:30px;text-align:center
+}
+.ringmini{
+  width:34px;height:34px;transform:rotate(-90deg)
+}
+.ringmini circle{fill:none;stroke-width:3}
+.ringmini .track{stroke:rgba(255,255,255,.1)}
+.ringmini .progress{stroke:var(--green);stroke-linecap:round;transition:stroke-dashoffset .4s linear}
+.scoreline{display:flex;align-items:center;gap:12px;margin-top:17px}
+.scoreline label{font:9px var(--mo);color:var(--muted);white-space:nowrap}
+.trackbar{height:5px;background:rgba(255,255,255,.07);flex:1;overflow:hidden}
+.trackbar div{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--cyan),var(--green));transition:width .4s}
+.scorepct{font:11px var(--mo);color:var(--green);min-width:38px;text-align:right}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.tag{
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025);
+  padding:6px 9px;font-size:11px;color:#b5d2d9
+}
+.tag.good{border-color:rgba(0,255,156,.3);color:var(--green)}
+.tag.warn{border-color:rgba(255,215,106,.3);color:var(--gold)}
+.tag.bad{border-color:rgba(255,53,94,.3);color:var(--red)}
+.metric{
+  padding:14px;border:1px solid rgba(0,234,255,.12);
+  background:rgba(0,234,255,.025);min-width:0
+}
+.metric strong{display:block;font:700 23px var(--cy);color:var(--cyan);overflow-wrap:anywhere}
+.metric span{display:block;font-size:10px;letter-spacing:1px;color:var(--muted);margin-top:6px}
+.frequency{
+  height:140px;display:flex;align-items:stretch;gap:6px;
+  padding-top:12px
+}
+.freqcol{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;align-items:center}
+.freqbar{height:100px;width:100%;display:flex;align-items:flex-end}
+.freqbar i{
+  display:block;width:100%;min-height:2px;
+  background:linear-gradient(0deg,rgba(0,234,255,.23),var(--cyan));
+  box-shadow:0 0 10px rgba(0,234,255,.08);transition:height .4s
+}
+.freqcol span{font:9px var(--mo);color:var(--muted)}
+.scroll{overflow:auto;max-width:100%;max-height:430px}
+table{width:100%;border-collapse:collapse;font:11px var(--mo);text-align:left}
+th{
+  position:sticky;top:0;z-index:1;background:#071116;
+  color:var(--muted);font-size:9px;letter-spacing:.7px;
+  padding:12px 9px;border-bottom:1px solid var(--line)
+}
+td{padding:12px 9px;border-bottom:1px solid rgba(255,255,255,.055);white-space:nowrap}
+tbody tr:hover{background:rgba(0,234,255,.035)}
+td.center,th.center{text-align:center}
+.BIG-t{color:var(--cyan)}.SMALL-t{color:var(--purple)}
+.WIN,.LIVE-t{color:var(--green)}.LOSS,.OFFLINE-t{color:var(--red)}
+.JACKPOT{color:var(--gold)}.PENDING{color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:28px 8px;font-size:12px}
+.summary{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:13px
+}
+.summary div{padding:12px 6px;background:rgba(255,255,255,.025);text-align:center}
+.summary b{display:block;font:700 19px var(--cy);color:var(--green)}
+.summary span{font-size:9px;color:var(--muted);letter-spacing:.7px}
+.field{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--muted)}
+.field input,.field select{
+  min-width:0;width:100%;height:41px;padding:8px;
+  border:1px solid rgba(0,234,255,.25);background:#050b0e;color:var(--cyan);
+  border-radius:2px;font:12px var(--mo)
+}
+.field input:focus,.field select:focus{border-color:var(--cyan)}
+.actionrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.actionrow button{flex:1}
+.stage-list{display:flex;flex-direction:column;gap:0}
+.stage-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:12px
+}
+.stage-row b{font:11px var(--mo);text-align:right}
+.terminal{
+  padding:13px;background:rgba(0,0,0,.35);border:1px solid rgba(0,255,156,.13);
+  color:var(--green);font:10px/1.8 var(--mo);overflow-wrap:anywhere;
+  max-height:200px;overflow:auto
+}
+.terminal p{margin:0}
+.terminal p span{color:var(--cyan)}
+.settings{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+.toggle{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+.toggle input{accent-color:var(--green);width:16px;height:16px}
+.footer{text-align:center;color:var(--muted);font:9px/1.8 var(--mo);letter-spacing:.4px;padding:7px}
+.profile{text-align:center;padding:32px 18px}
+.profile .crown{font-size:35px}
+.profile .brand{margin:14px 0}
+a.link{color:var(--cyan);overflow-wrap:anywhere}
+#intro{
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:22px;background:#020508;transition:opacity .65s,visibility .65s;
+}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+.intro-inner{width:min(500px,100%);text-align:center}
+.intro-logo{font:900 clamp(20px,5vw,32px) var(--cy);color:var(--gold);letter-spacing:2px}
+.intro-logo span{color:var(--cyan)}
+.intro-core{width:90px;height:90px;border:1px solid var(--cyan);border-radius:50%;margin:30px auto;position:relative;animation:spin 4s linear infinite}
+.intro-core:before,.intro-core:after{content:"";position:absolute;inset:10px;border:1px dashed var(--green);border-radius:50%;transform:rotateX(65deg)}
+.intro-core:after{inset:22px;border-color:var(--gold);transform:rotateY(65deg)}
+.intro-log{min-height:76px;text-align:left;font:10px/2 var(--mo);color:var(--green);margin:18px auto;max-width:370px}
+.intro-progress{height:2px;background:#13242b;max-width:370px;margin:0 auto 20px}
+.intro-progress div{height:100%;width:0;background:var(--cyan);transition:width .3s}
+.intro-actions{display:flex;justify-content:center;gap:10px}
+@media(min-width:850px){
+  .app{padding-top:24px}
+  .mainlayout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.85fr);gap:14px;align-items:start}
+  .mainlayout>.view{grid-column:1/-1}
+  .hero{min-height:405px}
+  .signal-zone{grid-template-columns:minmax(0,1fr) 180px}
+  .reactor{width:175px;height:175px}
+}
+@media(max-width:600px){
+  .app{padding:10px 10px 24px;gap:10px}
+  .topbar{padding:12px;gap:7px}
+  .brand{font-size:12px;letter-spacing:.7px}
+  .eyebrow{font-size:8px;letter-spacing:1px}
+  .status{font-size:9px;padding:6px}
+  .header-actions{gap:3px}
+  .header-actions .icon-btn{padding:6px;min-width:33px;min-height:34px}
+  .nav{gap:3px;padding:4px}
+  .navbtn{min-height:47px;flex-direction:column;gap:3px;font-size:8px;padding:4px 1px}
+  .navbtn .ni{font-size:16px}
+  .card{padding:14px}
+  .hero{padding:14px;min-height:0}
+  .signal-zone{grid-template-columns:minmax(0,1fr) 100px;gap:3px;min-height:140px}
+  .reactor{width:100px;height:100px}
+  .signal{font-size:clamp(30px,8vw,46px);letter-spacing:0}
+  .grid2{grid-template-columns:1fr}
+  .metric{padding:10px}
+  .metric strong{font-size:19px}
+  .summary{gap:4px}
+  .summary div{padding:10px 3px}
+  .summary b{font-size:16px}
+  .summary span{font-size:8px}
+  th{padding:10px 7px}
+  td{padding:10px 7px}
+  .settings{grid-template-columns:1fr}
+}
+@media(max-width:350px){
+  .signal-zone{grid-template-columns:1fr}
+  .reactor{width:80px;height:80px;grid-row:1}
+  .period-number{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
 </style>
 </head>
+
 <body>
-<video class="bg-video" autoplay loop muted playsinline preload="metadata" aria-hidden="true"><source src="https://www.image2url.com/r2/default/videos/1787103983251-dd3aedcb-dd5a-42fd-81a9-863fc605e54e.mp4" type="video/mp4"></video>
+<div id="world" aria-hidden="true"><div class="fallback" id="fallback"></div></div>
+<div class="ambient" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
+
+<div id="intro" role="dialog" aria-label="Cyber core startup">
+  <div class="intro-inner">
+    <div class="eyebrow">Secure visualization environment / v3.0</div>
+    <div class="intro-core" aria-hidden="true"></div>
+    <div class="intro-logo">BILAL SIR <span>VIP</span> 👑</div>
+    <div class="intro-log" id="introLog" aria-live="polite">BOOTING VISUAL SYSTEM...</div>
+    <div class="intro-progress"><div id="introProgress"></div></div>
+    <div class="intro-actions">
+      <button class="primary" id="skipIntro">ENTER COMMAND CENTER →</button>
+    </div>
+    <p class="note">Visualization only. No prediction is guaranteed.</p>
+  </div>
+</div>
 
 <div class="app">
- <header class="box head">
-  <div class="brand">BILAL SIR <b>VIP</b> 👑</div>
-  <span class="pill st-CONNECTING" id="status">CONNECTING</span>
- </header>
- <nav class="tabs" aria-label="Sections">
-  <button class="tb on" data-t="homeView" type="button"><span>⚡</span><span>SIGNAL</span></button>
-  <button class="tb" data-t="stageView" type="button"><span>🎯</span><span>3 STAGE</span></button>
-  <button class="tb" data-t="historyView" type="button"><span>↻</span><span>HISTORY</span></button>
-  <button class="tb" data-t="gameView" type="button"><span>🧰</span><span>TOOLS</span></button>
-  <button class="tb" data-t="profileView" type="button"><span>👤</span><span>PROFILE</span></button>
- </nav>
-
- <section id="homeView" class="panel on">
-  <div class="box">
-   <div class="hero">
-    <div class="ring"><svg width="74" height="74" viewBox="0 0 74 74"><circle class="bgc" cx="37" cy="37" r="32"/><circle class="fg" id="arc" cx="37" cy="37" r="32" stroke-dasharray="201" stroke-dashoffset="0"/></svg><b id="timer">--</b></div>
-    <div class="big WAIT" id="signal">WAIT</div>
-   </div>
-   <div class="period" style="margin-top:12px"><small>NEXT PERIOD</small><span id="period">----------------</span><button class="icon-btn" id="copy" type="button" aria-label="Copy period number">📋</button></div>
-   <div class="meter"><span>PATTERN SCORE</span><i><b id="fill"></b></i><span id="pct">0%</span></div>
-   <div class="tags" id="why"></div><div class="tags" id="badges"></div>
-   <div class="note" id="backtest"></div>
-   <div class="note">Random picks (no predictive value): <b id="picks">--</b></div>
-   <div class="note">Heuristic only. Results are random, so no signal is a guarantee. Never bet money you cannot afford to lose.</div>
+<header class="panel topbar">
+  <div>
+    <div class="brand">BILAL SIR <em>VIP</em> 👑</div>
+    <div class="eyebrow" style="margin-top:5px">CYBER INTELLIGENCE // WINGO 1M</div>
   </div>
- </section>
-
- <section id="stageView" class="panel">
-  <div class="box"><div class="ttl">3 STAGE TRACKER (LIVE)</div><div class="st" id="stLive"></div></div>
-  <div class="box"><div class="ttl">3 STAGE REPLAY (STORED HISTORY)</div><div class="st" id="stRep"></div></div>
-  <div class="box"><div class="ttl">STAKE PLAN CHECK (1x, 2x, 4x)</div>
-   <div class="grid" style="grid-template-columns:1fr 1fr"><label>Base stake<input id="kB" type="number" value="100" min="1"></label><label>Payout x<input id="kP" type="number" value="1.96" step="0.01" min="1"></label></div>
-   <div class="note" id="kOut"></div></div>
-  <div class="note">A cycle ends on the first win, or after 3 losses in a row (bust). Counts come only from real recorded results.</div>
- </section>
-
- <main id="historyView" class="panel">
-  <div class="box">
-   <div class="scroll"><table><thead><tr><th>PRD</th><th>PRED</th><th>SCORE</th><th>NUM</th><th>RES</th></tr></thead><tbody id="rows"></tbody></table>
-   <div class="empty" id="empty">No settled or pending signals yet. Signals appear only when live data supports one.</div></div>
-   <div class="sum"><span>🏆 <b id="cW" class="WIN">0</b></span><span>💀 <b id="cL" class="LOSS">0</b></span><span>👛 <b id="cJ" class="JACKPOT">0</b></span><span>📊 <b id="cT">0</b></span></div>
+  <div class="header-actions">
+    <span id="status" class="status CONNECTING" role="status" aria-live="polite">CONNECTING</span>
+    <button class="icon-btn" id="fullscreen" type="button" aria-label="Toggle fullscreen" title="Fullscreen">⛶</button>
+    <button class="icon-btn" id="settingsBtn" type="button" aria-label="Open visual settings" title="Settings">⚙</button>
   </div>
- </main>
+</header>
 
- <section id="gameView" class="panel">
-  <div class="box"><div class="ttl">DATA &amp; STATS</div><div class="note" id="tStats"></div>
-   <div class="bars" id="tBars" aria-label="Number frequency"></div><div class="note" id="tStreak"></div></div>
-  <div class="box"><div class="ttl">STRATEGY CHECK</div>
-   <table><thead><tr><th>RULE</th><th>TESTS</th><th>HIT %</th></tr></thead><tbody id="tStrat"></tbody></table>
-   <div class="note">Hit % has a margin of error. Every rule stays near 50%, and the gaps are noise, not skill.</div></div>
-  <div class="box"><div class="ttl">RISK CALCULATOR</div>
-   <div class="grid"><label>Stake<input id="rS" type="number" value="100" min="1"></label><label>Payout x<input id="rP" type="number" value="1.96" step="0.01" min="1"></label><label>Bets<input id="rN" type="number" value="100" min="1"></label></div>
-   <div class="note" id="rOut"></div></div>
-  <div class="box"><button class="exp" id="csv" type="button">EXPORT HISTORY (CSV)</button>
-   <div class="note">Source: live WinGo 1M feed. If unreachable the app shows OFFLINE or STALE and never invents results.</div></div>
- </section>
+<nav class="nav" aria-label="Command center navigation">
+  <button class="navbtn active" data-view="signalView" aria-current="page"><span class="ni">⌁</span>SIGNAL</button>
+  <button class="navbtn" data-view="stageView"><span class="ni">◉</span>3 STAGE</button>
+  <button class="navbtn" data-view="historyView"><span class="ni">↻</span>HISTORY</button>
+  <button class="navbtn" data-view="toolsView"><span class="ni">⌘</span>TOOLS</button>
+  <button class="navbtn" data-view="profileView"><span class="ni">♙</span>PROFILE</button>
+</nav>
 
- <section id="profileView" class="panel"><div class="box" style="text-align:center">
-  <div class="ttl">VIP PROFILE</div>
-  <div class="brand" style="margin-top:10px">BILAL SIR VIP 👑</div>
-  <div class="tg"><span class="ttl">📲 TELEGRAM</span><a href="https://t.me/+yde28-2BDlw3NzM1" target="_blank" rel="noopener noreferrer">@Avtarshing</a></div>
- </div></section>
+<section class="view active" id="signalView">
+  <div class="mainlayout">
+    <article class="panel card hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow">CORE / PRIMARY ANALYSIS</div>
+          <div class="card-title" style="margin:7px 0 0;padding:0;border:0">LIVE SIGNAL CONSOLE</div>
+        </div>
+        <span class="chip" id="feedAge">WAITING FOR DATA</span>
+      </div>
+
+      <div class="signal-zone">
+        <div class="signal-main">
+          <div class="eyebrow">NEXT PERIOD ANALYSIS</div>
+          <h1 class="signal WAIT" id="signal">WAIT</h1>
+          <div class="signal-sub" id="signalSub">AWAITING VALID DATA</div>
+        </div>
+        <div class="reactor" id="reactor" aria-label="Animated holographic reactor">
+          <i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i>
+        </div>
+      </div>
+
+      <div class="periodline">
+        <div style="min-width:0;flex:1">
+          <div class="eyebrow">NEXT PERIOD</div>
+          <div class="period-number" id="nextPeriod">----------------</div>
+          <div class="note" style="margin-top:5px">Latest result: <span id="currentPeriod">--</span></div>
+        </div>
+        <div class="timerbox">
+          <svg class="ringmini" viewBox="0 0 40 40" aria-hidden="true">
+            <circle class="track" cx="20" cy="20" r="16"/>
+            <circle class="progress" id="timerArc" cx="20" cy="20" r="16" stroke-dasharray="100.53" stroke-dashoffset="0"/>
+          </svg>
+          <div><div class="timer" id="timer">--</div><div class="eyebrow">SECONDS</div></div>
+        </div>
+        <button class="icon-btn" id="copyPeriod" type="button" aria-label="Copy next period">▣</button>
+      </div>
+
+      <div class="scoreline">
+        <label>PATTERN SCORE</label>
+        <div class="trackbar"><div id="scoreFill"></div></div>
+        <span class="scorepct" id="scorePct">0%</span>
+      </div>
+      <div class="tags" id="reasonTags"><span class="tag">Waiting for 10 valid results</span></div>
+      <p class="note" id="backtest">Historical evaluation will appear when sufficient data is available.</p>
+      <p class="note">Pattern score measures historical-side concentration, not probability of winning. Random outcomes can defeat every heuristic.</p>
+    </article>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <article class="panel card">
+        <div class="card-title">◈ FEED DIAGNOSTICS <span class="muted">SYS.01</span></div>
+        <div class="stage-list">
+          <div class="stage-row"><span>Connection</span><b id="diagStatus" class="CONNECTING">CONNECTING</b></div>
+          <div class="stage-row"><span>Stored results</span><b id="diagCount">0</b></div>
+          <div class="stage-row"><span>Last successful update</span><b id="lastUpdate">Never</b></div>
+          <div class="stage-row"><span>Latest period</span><b id="diagPeriod">--</b></div>
+        </div>
+        <p class="note" id="diagError" role="status">Establishing data connection...</p>
+        <div class="actionrow"><button class="secondary" id="refresh" type="button">↻ REFRESH DATA</button></div>
+      </article>
+
+      <article class="panel card">
+        <div class="card-title">◈ RESULT FREQUENCY <span class="muted">0–9</span></div>
+        <div class="frequency" id="frequency"></div>
+        <p class="note" id="freqStats">No recorded results.</p>
+      </article>
+
+      <article class="panel card">
+        <div class="card-title">◈ OUTCOME LEDGER</div>
+        <div class="summary">
+          <div><b id="wins">0</b><span>WIN</span></div>
+          <div><b id="losses" style="color:var(--red)">0</b><span>LOSS</span></div>
+          <div><b id="jackpots" style="color:var(--gold)">0</b><span>EXACT PICK</span></div>
+          <div><b id="totalSettled">0</b><span>SETTLED</span></div>
+        </div>
+        <p class="note" style="margin-top:12px">Historical counts are based on recorded heuristic signals. They are not a promise of future performance.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="stageView">
+  <article class="panel card">
+    <div class="card-title">◈ LIVE THREE-STAGE TRACKER</div>
+    <div id="stageLive" class="stage-list"></div>
+    <p class="note" style="margin-top:12px">This tracker groups recorded outcomes into cycles. It does not recommend chasing losses.</p>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ STORED RESULT REPLAY</div>
+    <div id="stageReplay" class="stage-list"></div>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ STAKE SCENARIO CALCULATOR</div>
+    <div class="grid2">
+      <label class="field">Base stake<input id="baseStake" type="number" value="100" min="0.01" step="any"></label>
+      <label class="field">Gross payout multiplier<input id="stagePayout" type="number" value="1.96" min="0" step="any"></label>
+    </div>
+    <div id="stageCalc" class="terminal" style="margin-top:14px" aria-live="polite"></div>
+    <p class="note" style="margin-top:10px">Illustrative arithmetic only. Stake escalation increases exposure; a sequence of losses can erase previous gains.</p>
+  </article>
+</section>
+
+<section class="view" id="historyView">
+  <article class="panel card">
+    <div class="card-title">◈ SIGNAL & RESULT HISTORY <span class="muted" id="historyCount">0 RECORDS</span></div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>PERIOD</th><th>PREDICTION</th><th class="center">SCORE</th><th class="center">NUMBER / PICKS</th><th class="center">RESULT</th></tr></thead>
+        <tbody id="historyRows"></tbody>
+      </table>
+      <div class="empty" id="historyEmpty">No signals recorded. A signal is created only when the heuristic meets its threshold.</div>
+    </div>
+    <div class="actionrow">
+      <button class="secondary" id="exportSignals" type="button">EXPORT SIGNALS CSV</button>
+      <button class="secondary" id="exportResults" type="button">EXPORT RESULTS CSV</button>
+    </div>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ RAW RECENT RESULTS</div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>PERIOD</th><th class="center">NUMBER</th><th class="center">SIZE</th><th class="center">COLOR</th></tr></thead>
+        <tbody id="rawRows"></tbody>
+      </table>
+    </div>
+  </article>
+</section>
+
+<section class="view" id="toolsView">
+  <article class="panel card">
+    <div class="card-title">◈ STATISTICAL OVERVIEW</div>
+    <div class="grid3">
+      <div class="metric"><strong id="statN">0</strong><span>STORED RESULTS</span></div>
+      <div class="metric"><strong id="statBig">--</strong><span>BIG SHARE</span></div>
+      <div class="metric"><strong id="statSmall">--</strong><span>SMALL SHARE</span></div>
+    </div>
+    <p class="note" id="streakInfo" style="margin-top:13px">Collecting observations.</p>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ HEURISTIC BACKTEST</div>
+    <div class="scroll">
+      <table><thead><tr><th>RULE</th><th class="center">TESTS</th><th class="center">HIT RATE</th></tr></thead><tbody id="strategyRows"></tbody></table>
+    </div>
+    <p class="note" style="margin-top:12px">The approximate interval shown is a simple sampling-error indicator, not a guarantee. Historical tests cannot establish a reliable edge in a random game.</p>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ RISK & EXPECTED VALUE</div>
+    <div class="grid3">
+      <label class="field">Stake<input id="riskStake" type="number" value="100" min="0" step="any"></label>
+      <label class="field">Gross payout x<input id="riskPayout" type="number" value="1.96" min="0" step="any"></label>
+      <label class="field">Number of bets<input id="riskBets" type="number" value="100" min="0" step="1"></label>
+    </div>
+    <div class="terminal" id="riskOutput" style="margin-top:14px" aria-live="polite"></div>
+    <p class="note" style="margin-top:10px">The example uses an assumed 50% win chance. Actual odds and payout terms may differ. This is not a forecast of game results.</p>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ VISUAL & DATA CONTROLS</div>
+    <div class="settings">
+      <label class="field">3D quality
+        <select id="quality"><option value="low">Low / mobile</option><option value="medium" selected>Balanced</option><option value="high">High</option></select>
+      </label>
+      <label class="field">Animation intensity
+        <select id="motion"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
+      </label>
+      <label class="field">Intro
+        <button class="secondary" id="replayIntro" type="button">REPLAY STARTUP</button>
+      </label>
+    </div>
+    <div class="settings" style="margin-top:14px">
+      <label class="toggle"><input type="checkbox" id="soundToggle"> Enable sound</label>
+      <label class="toggle"><input type="checkbox" id="rainToggle" checked> Digital particles</label>
+      <label class="toggle"><input type="checkbox" id="reduceToggle"> Reduce motion</label>
+    </div>
+    <div class="actionrow"><button class="secondary" id="resetVisuals" type="button">RESET VISUAL SETTINGS</button></div>
+    <p class="note" style="margin-top:12px">Sound is off by default. A short synthesized tone is played only after you enable sound and interact with the interface.</p>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ TERMINAL LOG</div>
+    <div class="terminal" id="terminal" aria-live="polite"><p>[SYS] Initializing interface...</p></div>
+    <div class="actionrow"><button class="secondary" id="clearLog" type="button">CLEAR LOG</button><button class="secondary" id="retry3d" type="button">RETRY 3D ENGINE</button></div>
+  </article>
+</section>
+
+<section class="view" id="profileView">
+  <article class="panel card profile">
+    <div class="crown">👑</div>
+    <div class="brand">BILAL SIR <em>VIP</em></div>
+    <p class="eyebrow">CYBER COMMAND CENTER</p>
+    <p class="note" style="max-width:520px;margin:18px auto">A futuristic interface for viewing recorded WinGo 1M results, statistical heuristics and data diagnostics.</p>
+    <div class="tags" style="justify-content:center">
+      <span class="tag">THREE.JS</span><span class="tag">WEBGL</span><span class="tag">LIVE DATA</span>
+    </div>
+    <div class="actionrow" style="justify-content:center">
+      <a class="link" href="https://t.me/+yde28-2BDlw3NzM1" target="_blank" rel="noopener noreferrer">↗ TELEGRAM / OFFICIAL CHANNEL</a>
+    </div>
+  </article>
+  <article class="panel card">
+    <div class="card-title">◈ ABOUT THIS SYSTEM</div>
+    <p class="note">The 3D scene is decorative and interactive. The signal rule checks the ten latest valid results and emits BIG or SMALL only when one side accounts for at least 70% of that window. Otherwise it displays WAIT.</p>
+    <p class="note" style="margin-top:10px">Past performance is descriptive, not predictive. This page does not guarantee winnings and does not place bets.</p>
+  </article>
+</section>
+
+<footer class="footer">BILAL SIR VIP 👑 // CYBER COMMAND CENTER<br>REAL DATA WHEN AVAILABLE · NO GUARANTEED PREDICTIONS</footer>
 </div>
 
 <script>
 "use strict";
-const $=id=>document.getElementById(id);
+
+/* =========================================================
+   CONFIGURATION
+   The original WinGo endpoint is retained. No substitute API.
+========================================================= */
 const API="https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-let results=[],preds={},status="CONNECTING",fails=0,inflight=false,pollT=null,started=false,lastSig="";
+const $=id=>document.getElementById(id);
+const REDUCED=window.matchMedia("(prefers-reduced-motion: reduce)");
+
+let results=[];
 let store=[];
-try{preds=JSON.parse(localStorage.getItem("bsv_preds")||"{}")||{}}catch(e){preds={}}
-try{store=JSON.parse(localStorage.getItem("bsv_res")||"[]")||[]}catch(e){store=[]}
-function merge(){
- const m=new Map(store.map(r=>[r.issue,r]));results.forEach(r=>m.set(r.issue,r));
- store=[...m.values()].sort((a,b)=>BigInt(b.issue)>BigInt(a.issue)?1:-1).slice(0,300);
- try{localStorage.setItem("bsv_res",JSON.stringify(store))}catch(e){}
+let predictions={};
+let feedStatus="CONNECTING";
+let failCount=0;
+let lastSuccess=0;
+let lastError="";
+let polling=false;
+let pollTimer=null;
+let clockTimer=null;
+let three=null;
+let renderer=null;
+let scene=null;
+let camera=null;
+let core=null;
+let particles=null;
+let particleMaterial=null;
+let rings=[];
+let orbiters=[];
+let grid=null;
+let raf=0;
+let lastRenderKey="";
+let soundContext=null;
+let soundEnabled=false;
+let appStarted=false;
+let introTimers=[];
+let userMotion={x:0,y:0};
+let motionTarget={x:0,y:0};
+let touchPoint=null;
+let lastTouch=0;
+let visualSettings={quality:"medium",motion:"medium",rain:true,reduce:REDUCED.matches};
+
+const MAX_RESULTS=500;
+const MAX_SIGNALS=100;
+const STORAGE_RESULTS="bsv_res_v3";
+const STORAGE_PRED="bsv_preds_v3";
+const STORAGE_SETTINGS="bsv_visual_settings_v3";
+
+function log(message,type="SYS"){
+  const root=$("terminal");
+  if(!root)return;
+  const p=document.createElement("p");
+  const span=document.createElement("span");
+  span.textContent="["+type+"] ";
+  p.append(span,document.createTextNode(String(message).slice(0,400)));
+  root.appendChild(p);
+  while(root.children.length>50)root.firstElementChild.remove();
+  root.scrollTop=root.scrollHeight;
 }
 
-/* ---------- navigation ---------- */
-document.querySelectorAll(".tb").forEach(b=>b.addEventListener("click",()=>{
- document.querySelectorAll(".tb").forEach(x=>x.classList.toggle("on",x===b));
- document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===b.dataset.t));
-}));
+function escapeSafeString(v,max=100){
+  return typeof v==="string"?v.slice(0,max):"";
+}
 
-/* ---------- helpers ---------- */
-const size=n=>n>=5?"BIG":"SMALL";
-function color(n){return [1,3,7,9].includes(n)?"G":[2,4,6,8].includes(n)?"R":"V"}
-function dragon(c){if(c.length<3)return null;const a=c.slice(0,3);return a[0]===a[1]&&a[1]===a[2]?a[0]:null}
-function zigzag(c){if(c.length<4)return null;const a=c.slice(0,4);return a[0]!==a[1]&&a[1]!==a[2]&&a[2]!==a[3]&&a[0]===a[2]&&a[1]===a[3]?a.join(""):null}
-function setStatus(s,msg){status=s;const el=$("status");el.textContent=s;el.className="pill st-"+s;el.title=msg||""}
+function validIssue(v){
+  const s=String(v??"");
+  return /^\d{10,30}$/.test(s);
+}
 
-/* ---------- live data ---------- */
-async function fetchHistory(){
- const c=new AbortController(),t=setTimeout(()=>c.abort(),4000);
- try{
-  const r=await fetch(API+"?pageSize=20&ts="+Date.now(),{signal:c.signal});
-  if(!r.ok)throw new Error("HTTP "+r.status);
-  const l=(await r.json())?.data?.list;
-  if(!Array.isArray(l))throw new Error("Unexpected response format");
-  const seen=new Set(),out=[];
-  for(const x of l){
-   const i=String(x.issueNumber),n=Number.parseInt(x.number,10);
-   if(/^\d{10,}$/.test(i)&&n>=0&&n<=9&&!seen.has(i)){seen.add(i);out.push({issue:i,num:n})}
+function cmpIssue(a,b){
+  if(a===b)return 0;
+  if(!validIssue(a))return 1;
+  if(!validIssue(b))return -1;
+  return BigInt(a)>BigInt(b)?-1:1;
+}
+
+function validResult(r){
+  return r&&validIssue(r.issue)&&Number.isInteger(r.num)&&r.num>=0&&r.num<=9;
+}
+
+function normalizeStoredResults(value){
+  if(!Array.isArray(value))return [];
+  const map=new Map();
+  for(const r of value){
+    if(!validResult(r))continue;
+    map.set(r.issue,{issue:r.issue,num:r.num});
   }
-  if(!out.length)throw new Error("No valid records");
-  out.sort((a,b)=>BigInt(b.issue)>BigInt(a.issue)?1:-1);
-  return out;
- }finally{clearTimeout(t)}
+  return [...map.values()].sort((a,b)=>cmpIssue(a.issue,b.issue)).slice(0,MAX_RESULTS);
 }
-function schedule(){
- clearTimeout(pollT);const sec=new Date().getUTCSeconds(),base=(sec<=6||sec>=58)?1500:10000;
- pollT=setTimeout(poll,Math.min(base*2**fails,30000));
-}
-async function poll(){
- if(inflight||document.hidden){schedule();return}
- inflight=true;
- try{results=await fetchHistory();merge();fails=0;setStatus("LIVE");settle();ensureSignal()}
- catch(e){fails++;setStatus(results.length?"STALE":"OFFLINE",e.name==="AbortError"?"Request timed out":e.message)}
- finally{inflight=false;render();schedule()}
-}
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&started)poll()});
 
-/* ---------- signal rule (documented heuristic, no proven edge) ----------
-   Needs the 10 latest results. PATTERN SCORE = share of the majority side in those 10.
-   A signal follows the majority side only when the score is at least 70%. Otherwise WAIT. */
+function loadStorage(){
+  try{
+    store=normalizeStoredResults(JSON.parse(localStorage.getItem(STORAGE_RESULTS)||"[]"));
+  }catch(e){store=[];log("Stored result data was invalid and has been ignored.","WARN")}
+
+  try{
+    const raw=JSON.parse(localStorage.getItem(STORAGE_PRED)||"{}");
+    if(raw&&typeof raw==="object"&&!Array.isArray(raw)){
+      for(const [key,p] of Object.entries(raw)){
+        if(!validIssue(key)||!p||!["BIG","SMALL"].includes(p.side))continue;
+        if(!Number.isFinite(p.score)||p.score<0||p.score>1)continue;
+        if(!Array.isArray(p.picks)||p.picks.length!==2||!p.picks.every(n=>Number.isInteger(n)&&n>=0&&n<=9))continue;
+        if(!["PENDING","WIN","LOSS","JACKPOT"].includes(p.res))continue;
+        predictions[key]={
+          side:p.side,score:p.score,picks:p.picks,
+          res:p.res,num:Number.isInteger(p.num)&&p.num>=0&&p.num<=9?p.num:null
+        };
+      }
+    }
+  }catch(e){predictions={};log("Stored predictions were invalid and have been ignored.","WARN")}
+
+  loadSettings();
+}
+
+function saveStorage(){
+  try{
+    localStorage.setItem(STORAGE_RESULTS,JSON.stringify(store));
+    localStorage.setItem(STORAGE_PRED,JSON.stringify(predictions));
+  }catch(e){log("Local storage unavailable or full.","WARN")}
+}
+
+function mergeResults(incoming){
+  const map=new Map(store.map(r=>[r.issue,r]));
+  for(const r of incoming){
+    if(validResult(r))map.set(r.issue,{issue:r.issue,num:r.num});
+  }
+  store=[...map.values()].sort((a,b)=>cmpIssue(a.issue,b.issue)).slice(0,MAX_RESULTS);
+  results=store.slice(0,20);
+  saveStorage();
+}
+
+function setStatus(s,message=""){
+  feedStatus=s;
+  $("status").textContent=s;
+  $("status").className="status "+s;
+  $("diagStatus").textContent=s;
+  $("diagStatus").className=s;
+  if(message)lastError=message;
+  $("diagError").textContent=lastError||(s==="LIVE"?"Feed responding normally.":"Waiting for feed.");
+}
+
+function size(n){return n>=5?"BIG":"SMALL"}
+function flip(s){return s==="BIG"?"SMALL":"BIG"}
+function color(n){
+  if([1,3,7,9].includes(n))return "GREEN";
+  if([2,4,6,8].includes(n))return "RED";
+  return "VIOLET";
+}
+
+function majority(arr){
+  const w=arr.slice(0,10);
+  if(w.length<10)return null;
+  const b=w.filter(s=>s==="BIG").length;
+  return b>=5?"BIG":"SMALL";
+}
+
+/* The score is majority-side concentration in the latest ten results.
+   It is not a calibrated probability of the next result. */
 function analyze(sizes){
- const w=sizes.slice(0,10);
- if(w.length<10)return{side:null,score:0,why:"Need 10 results ("+w.length+" loaded)"};
- const b=w.filter(x=>x==="BIG").length,score=Math.max(b,10-b)/10,side=b>=5?"BIG":"SMALL";
- return score>=.7?{side,score,why:"Last 10: "+b+" BIG / "+(10-b)+" SMALL"}:{side:null,score,why:"No strong lean ("+Math.round(score*100)+"% < 70%)"};
+  const w=sizes.slice(0,10);
+  if(w.length<10)return {side:null,score:0,why:"Need 10 results ("+w.length+" loaded)"};
+  const b=w.filter(x=>x==="BIG").length;
+  const score=Math.max(b,10-b)/10;
+  const side=b>=5?"BIG":"SMALL";
+  if(score>=.7)return {side,score,why:"Latest 10: "+b+" BIG / "+(10-b)+" SMALL"};
+  return {side:null,score,why:"No strong lean: "+Math.round(score*100)+"% concentration; threshold 70%"};
 }
-function backtest(fn){
- fn=fn||(x=>analyze(x).side);
- const z=store.map(r=>size(r.num));let n=0,h=0;
- for(let i=0;i+11<=z.length;i++){const p=fn(z.slice(i+1));if(p){n++;if(p===z[i])h++}}
- return{n,h};
+
+function deterministicPicks(side,issue){
+  const pool=side==="BIG"?[5,6,7,8,9]:[0,1,2,3,4];
+  let hash=0;
+  for(const c of issue)hash=(hash*31+c.charCodeAt(0))>>>0;
+  const a=pool[hash%pool.length];
+  let b=pool[(hash+2)%pool.length];
+  if(a===b)b=pool[(hash+1)%pool.length];
+  return [a,b];
 }
-const moe=n=>n?Math.round(196*Math.sqrt(.25/n)):0;
-const flip=x=>x==="BIG"?"SMALL":"BIG";
-const maj=x=>{const w=x.slice(0,10);if(w.length<10)return null;return w.filter(v=>v==="BIG").length>=5?"BIG":"SMALL"};
-const STRATS=[["Follow majority of 10",maj],["Reverse majority of 10",x=>{const m=maj(x);return m&&flip(m)}],["Follow last result",x=>x[0]],["Reverse last result",x=>flip(x[0])],["Signal rule (70% lean)",x=>analyze(x).side]];
-function picks(side){const p=(side==="BIG"?[5,6,7,8,9]:[0,1,2,3,4]).sort(()=>Math.random()-.5);return[p[0],p[1]]}
+
 function ensureSignal(){
- if(!results.length)return;
- const next=String(BigInt(results[0].issue)+1n);
- if(preds[next])return;
- const a=analyze(results.map(r=>size(r.num)));
- if(a.side)preds[next]={side:a.side,score:a.score,picks:picks(a.side),res:"PENDING",num:null};
- save();
-}
-function settle(){
- for(const k in preds){
-  const p=preds[k];if(p.res!=="PENDING")continue;
-  const r=results.find(x=>x.issue===k);if(!r)continue;
-  p.num=r.num;
-  p.res=size(r.num)!==p.side?"LOSS":p.picks.includes(r.num)?"JACKPOT":"WIN";
- }
- save();
-}
-function save(){
- const keys=Object.keys(preds).sort((a,b)=>BigInt(b)>BigInt(a)?1:-1);
- keys.slice(25).forEach(k=>delete preds[k]);
- try{localStorage.setItem("bsv_preds",JSON.stringify(preds))}catch(e){}
+  if(results.length<10)return;
+  const latest=results[0];
+  const next=(BigInt(latest.issue)+1n).toString();
+  if(predictions[next])return;
+  const a=analyze(results.map(r=>size(r.num)));
+  if(!a.side)return;
+
+  predictions[next]={
+    side:a.side,score:a.score,picks:deterministicPicks(a.side,next),
+    res:"PENDING",num:null
+  };
+  trimPredictions();
+  saveStorage();
+  log("Recorded heuristic signal for period "+next,"SIGNAL");
 }
 
-/* ---------- render (only rebuilds what changed) ---------- */
-function render(){
- const next=results.length?String(BigInt(results[0].issue)+1n):"";
- $("period").textContent=next||"----------------";
- const keys=Object.keys(preds).sort((a,b)=>BigInt(b)>BigInt(a)?1:-1);
- const sig=JSON.stringify([status,store.length,results[0]&&results[0].issue,keys.map(k=>preds[k].res)]);
- if(sig===lastSig)return;lastSig=sig;
-
- const tb=$("rows");tb.textContent="";
- let W=0,L=0,J=0;
- for(const k of keys){
-  const p=preds[k];if(p.res==="WIN")W++;else if(p.res==="LOSS")L++;else if(p.res==="JACKPOT")J++;
-  const tr=document.createElement("tr");
-  [[k.slice(-4),""],[p.side,p.side+"-t"],[p.num===null?p.picks.join(","):String(p.num),""],[p.score?Math.round(p.score*100)+"%":"--",""],[p.res,p.res]].forEach(([t,c])=>{
-   const td=document.createElement("td");td.textContent=t;if(c)td.className=c;tr.appendChild(td)});
-  tb.appendChild(tr);
- }
- $("empty").style.display=keys.length?"none":"block";
- $("cW").textContent=W;$("cL").textContent=L;$("cJ").textContent=J;$("cT").textContent=W+L+J;
-
- const live=results.length>0,a=live?analyze(results.map(r=>size(r.num))):{side:null,score:0,why:"No live data yet"};
- const stale=status!=="LIVE";
- const s=!stale&&a.side?a.side:"WAIT";
- $("signal").textContent=s;$("signal").className="big "+s;
- $("fill").style.width=Math.round(a.score*100)+"%";$("pct").textContent=Math.round(a.score*100)+"%";
- const why=$("why");why.textContent="";
- [stale?"Feed "+status+": no signal":a.why].forEach(t=>{const e=document.createElement("span");e.className="tag";e.textContent=t;why.appendChild(e)});
- const cur=preds[next];$("picks").textContent=cur&&!stale?cur.picks.join(", "):"--";
- const bt=backtest();
- $("backtest").textContent=bt.n?"Measured hit rate of this rule: "+Math.round(bt.h/bt.n*100)+"% ±"+moe(bt.n)+"% over "+bt.n+" past signals (not a win probability)":"Measured hit rate: not enough history yet";
- renderTools();renderStages(keys);
- const c=results.slice(0,12).map(r=>color(r.num)),bd=$("badges");bd.textContent="";
- const d=dragon(c),z=zigzag(c);
- if(d){const e=document.createElement("span");e.className="tag dragon";e.textContent="🐉 Dragon "+d+d+d+" (info only)";bd.appendChild(e)}
- if(z){const e=document.createElement("span");e.className="tag zig";e.textContent="⚡ Zigzag "+z+" (info only)";bd.appendChild(e)}
+/* Settle only against validated, exact matching period IDs. */
+function settlePredictions(){
+  let changed=false;
+  const byIssue=new Map(store.map(r=>[r.issue,r]));
+  for(const [issue,p] of Object.entries(predictions)){
+    if(p.res!=="PENDING")continue;
+    const r=byIssue.get(issue);
+    if(!r)continue;
+    p.num=r.num;
+    p.res=size(r.num)!==p.side?"LOSS":p.picks.includes(r.num)?"JACKPOT":"WIN";
+    changed=true;
+    log("Period "+issue+" settled: "+p.res,"RESULT");
+  }
+  if(changed)saveStorage();
 }
 
-/* ---------- tools ---------- */
-function cell(tr,t,c){const td=document.createElement("td");td.textContent=t;if(c)td.className=c;tr.appendChild(td)}
-function renderTools(){
- const n=store.length,B=store.filter(r=>r.num>=5).length;
- $("tStats").textContent=n?"Stored results: "+n+" | BIG "+Math.round(B/n*100)+"% | SMALL "+Math.round((n-B)/n*100)+"%":"Collecting data. Keep this page open to build history.";
- const cnt=Array(10).fill(0);store.forEach(r=>cnt[r.num]++);
- const mx=Math.max(1,...cnt),bars=$("tBars");bars.textContent="";
- cnt.forEach((c,i)=>{const d=document.createElement("div");d.className="bar";const b=document.createElement("i");b.style.height=(c/mx*100)+"%";const l=document.createElement("span");l.textContent=i+":"+c;d.append(b,l);bars.appendChild(d)});
- let best=0,run=0,prev="";[...store].reverse().forEach(r=>{const z=size(r.num);run=z===prev?run+1:1;prev=z;best=Math.max(best,run)});
- $("tStreak").textContent=n?"Longest same-side streak stored: "+best:"";
- const tb=$("tStrat");tb.textContent="";
- STRATS.forEach(([name,fn])=>{const r=backtest(fn),tr=document.createElement("tr");
-  cell(tr,name,"l");cell(tr,String(r.n));cell(tr,r.n?Math.round(r.h/r.n*100)+"% ±"+moe(r.n):"--");tb.appendChild(tr)});
- calcRisk();
+function trimPredictions(){
+  const keys=Object.keys(predictions).sort(cmpIssue);
+  keys.slice(MAX_SIGNALS).forEach(k=>delete predictions[k]);
 }
-function calcRisk(){
- const st=+$("rS").value||0,pay=+$("rP").value||0,N=Math.floor(+$("rN").value)||0;
- const ev=st*(.5*pay)-st,edge=(.5*pay-1)*100;
- $("rOut").textContent="At a fair 50% chance: expected "+(ev>=0?"+":"")+ev.toFixed(2)+" per bet ("+edge.toFixed(1)+"%), "+(ev*N>=0?"+":"")+(ev*N).toFixed(0)+" over "+N+" bets. A chasing system after 5 losses in a row (chance "+(100/32).toFixed(1)+"%) needs a stake of "+(st*32)+". A negative edge cannot be beaten by any signal.";
-}
-["rS","rP","rN"].forEach(id=>$(id).addEventListener("input",calcRisk));
-$("csv").onclick=()=>{
- const rows=["issue,number,size"].concat(store.map(r=>r.issue+","+r.num+","+size(r.num)));
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv"}));a.download="bilal-sir-vip-results.csv";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-};
 
-/* ---------- 3 stage tracker ---------- */
-function cycles(o){const r={n:0,s:[0,0,0],bust:0};let st=0;for(const w of o){if(w){r.s[st]++;r.n++;st=0}else{st++;if(st>2){r.bust++;r.n++;st=0}}}return r}
-function fillStage(el,r){
- el.textContent="";const pc=v=>r.n?Math.round(v/r.n*100)+"%":"--";
- const won=r.s[0]+r.s[1]+r.s[2];
- [["Finished cycles",r.n],["Won at stage 1",r.s[0]+" ("+pc(r.s[0])+")"],["Won at stage 2",r.s[1]+" ("+pc(r.s[1])+")"],["Won at stage 3",r.s[2]+" ("+pc(r.s[2])+")"],["Bust (3 losses)",r.bust+" ("+pc(r.bust)+")"],["Won within 3 stages",won+" ("+pc(won)+")"]].forEach(([a,b])=>{
-  const d=document.createElement("div"),x=document.createElement("span"),y=document.createElement("b");x.textContent=a;y.textContent=b;d.append(x,y);el.appendChild(d)});
+/* Only use older observations when testing each historical target.
+   store is newest-first; slice(i+1) contains strictly older results. */
+function backtest(fn){
+  const z=store.map(r=>size(r.num));
+  let tests=0,hits=0;
+  for(let i=0;i+11<=z.length;i++){
+    const prediction=fn(z.slice(i+1));
+    if(!prediction)continue;
+    tests++;
+    if(prediction===z[i])hits++;
+  }
+  return {tests,hits};
 }
-function renderStages(keys){
- const live=keys.slice().reverse().filter(k=>preds[k].res!=="PENDING").map(k=>preds[k].res!=="LOSS");
- fillStage($("stLive"),cycles(live));
- const z=store.map(r=>size(r.num)),o=[];
- for(let i=z.length-11;i>=0;i--){const p=analyze(z.slice(i+1)).side;if(p)o.push(p===z[i])}
- fillStage($("stRep"),cycles(o));
- const b=+$("kB").value||0,p=+$("kP").value||0;
- const p1=b*(p-1),p2=2*b*p-3*b,p3=4*b*p-7*b,ev=.5*p1+.25*p2+.125*p3-.125*7*b;
- $("kOut").textContent="Win at stage 1: "+(p1>=0?"+":"")+p1.toFixed(0)+", stage 2: "+(p2>=0?"+":"")+p2.toFixed(0)+", stage 3: "+(p3>=0?"+":"")+p3.toFixed(0)+", bust: -"+(7*b)+". Chance to win within 3 stages at 50% is 87.5%, but the average result per cycle is "+(ev>=0?"+":"")+ev.toFixed(1)+". A bust erases many small wins.";
+
+function margin(n){
+  return n?Math.round(196*Math.sqrt(.25/n)):0;
 }
-["kB","kP"].forEach(id=>$(id).addEventListener("input",()=>renderStages(Object.keys(preds))));
 
-/* ---------- countdown (text only, UTC) ---------- */
-function tick(){const l=60-new Date().getUTCSeconds();$("timer").textContent=String(l).padStart(2,"0");$("arc").style.strokeDashoffset=String(201*(1-l/60))}
+const STRATEGIES=[
+  ["Majority of previous 10",majority],
+  ["Reverse previous 10",x=>{const m=majority(x);return m?flip(m):null}],
+  ["Follow last result",x=>x.length?x[0]:null],
+  ["Reverse last result",x=>x.length?flip(x[0]):null],
+  ["70% concentration rule",x=>analyze(x).side]
+];
 
-/* ---------- copy ---------- */
-$("copy").onclick=async()=>{
- const t=$("period").textContent;if(!/^\d+$/.test(t))return;
- try{await navigator.clipboard.writeText(t);$("copy").textContent="✓"}catch(e){$("copy").textContent="✕"}
- setTimeout(()=>{$("copy").textContent="📋"},1200);
-};
+/* =========================================================
+   API: preserve the supplied endpoint; validate response.
+========================================================= */
+async function fetchHistory(){
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),8000);
+  try{
+    const response=await fetch(API+"?pageSize=100&ts="+Date.now(),{
+      signal:controller.signal,
+      cache:"no-store",
+      headers:{Accept:"application/json"}
+    });
+    if(!response.ok)throw new Error("HTTP "+response.status);
+
+    const json=await response.json();
+    const list=json?.data?.list;
+    if(!Array.isArray(list))throw new Error("Unexpected API response schema");
+
+    const map=new Map();
+    for(const item of list){
+      const issue=String(item?.issueNumber??"");
+      const num=Number(item?.number);
+      if(!validIssue(issue)||!Number.isInteger(num)||num<0||num>9)continue;
+      map.set(issue,{issue,num});
+    }
+    const out=[...map.values()].sort((a,b)=>cmpIssue(a.issue,b.issue));
+    if(!out.length)throw new Error("No valid result records");
+    return out;
+  }finally{clearTimeout(timeout)}
+}
+
+function schedulePoll(){
+  clearTimeout(pollTimer);
+  const delay=failCount?Math.min(5000*Math.pow(2,Math.min(failCount-1,3)),40000):12000;
+  pollTimer=setTimeout(poll,delay);
+}
+
+async function poll(){
+  if(polling||document.hidden){schedulePoll();return}
+  polling=true;
+  try{
+    const fresh=await fetchHistory();
+    mergeResults(fresh);
+    failCount=0;
+    lastSuccess=Date.now();
+    lastError="";
+    setStatus("LIVE");
+    settlePredictions();
+    ensureSignal();
+  }catch(e){
+    failCount++;
+    const msg=e.name==="AbortError"?"Request timed out":escapeSafeString(e.message,180)||"Unknown feed error";
+    lastError=msg;
+    const age=lastSuccess?Date.now()-lastSuccess:Infinity;
+    setStatus(age<60000?"STALE":store.length?"STALE":"OFFLINE",msg);
+    log(msg,"API");
+  }finally{
+    polling=false;
+    renderAll();
+    schedulePoll();
+  }
+}
+
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    clearTimeout(pollTimer);
+    if(raf)cancelAnimationFrame(raf);
+    raf=0;
+  }else{
+    if(three&&renderer&&!raf)animate();
+    poll();
+  }
+});
+
+/* =========================================================
+   Navigation
+========================================================= */
+document.querySelectorAll(".navbtn").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".navbtn").forEach(b=>{
+      b.classList.toggle("active",b===button);
+      if(b===button)b.setAttribute("aria-current","page");
+      else b.removeAttribute("aria-current");
+    });
+    document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===button.dataset.view));
+    playTone(360,.035);
+  });
+});
+
+/* =========================================================
+   Main render
+========================================================= */
+function el(tag,text,className){
+  const n=document.createElement(tag);
+  if(text!==undefined)n.textContent=String(text);
+  if(className)n.className=className;
+  return n;
+}
+
+function renderHistory(){
+  const tbody=$("historyRows");
+  tbody.replaceChildren();
+  const keys=Object.keys(predictions).sort(cmpIssue);
+  let W=0,L=0,J=0,T=0;
+
+  for(const key of keys){
+    const p=predictions[key];
+    if(p.res==="WIN")W++;
+    if(p.res==="LOSS")L++;
+    if(p.res==="JACKPOT")J++;
+    if(p.res!=="PENDING")T++;
+
+    const tr=document.createElement("tr");
+    const vals=[
+      [key.slice(-8),"mono"],
+      [p.side,p.side+"-t"],
+      [Math.round(p.score*100)+"%","center"],
+      [p.num===null?p.picks.join(", "):String(p.num),"center"],
+      [p.res,p.res]
+    ];
+    vals.forEach(([value,cls])=>{
+      const td=el("td",value,cls);
+      if(cls==="center")td.style.textAlign="center";
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+
+  $("historyEmpty").style.display=keys.length?"none":"block";
+  $("historyCount").textContent=keys.length+" RECORDS";
+  $("wins").textContent=W;
+  $("losses").textContent=L;
+  $("jackpots").textContent=J;
+  $("totalSettled").textContent=T;
+
+  const raw=$("rawRows");
+  raw.replaceChildren();
+  store.slice(0,100).forEach(r=>{
+    const tr=document.createElement("tr");
+    tr.append(
+      el("td",r.issue),
+      el("td",r.num,"center"),
+      el("td",size(r.num),size(r.num)+"-t center"),
+      el("td",color(r.num),"center")
+    );
+    raw.appendChild(tr);
+  });
+}
+
+function renderFrequency(){
+  const counts=Array(10).fill(0);
+  store.forEach(r=>counts[r.num]++);
+  const max=Math.max(1,...counts);
+  const root=$("frequency");
+  root.replaceChildren();
+  counts.forEach((count,n)=>{
+    const col=el("div",undefined,"freqcol");
+    const bar=el("div",undefined,"freqbar");
+    const i=el("i");
+    i.style.height=(count/max*100)+"%";
+    i.style.opacity=count?.95:.17;
+    i.title=n+": "+count+" results";
+    bar.appendChild(i);
+    col.append(bar,el("span",n+":"+count));
+    root.appendChild(col);
+  });
+  const total=store.length;
+  const big=store.filter(r=>r.num>=5).length;
+  $("freqStats").textContent=total?
+    total+" recorded results · BIG "+Math.round(big/total*100)+"% · SMALL "+Math.round((total-big)/total*100)+"%":
+    "No recorded results.";
+  $("statN").textContent=total;
+  $("statBig").textContent=total?Math.round(big/total*100)+"%":"--";
+  $("statSmall").textContent=total?Math.round((total-big)/total*100)+"%":"--";
+
+  let longest=0,run=0,prev=null;
+  [...store].reverse().forEach(r=>{
+    const s=size(r.num);
+    run=s===prev?run+1:1;
+    prev=s;
+    longest=Math.max(longest,run);
+  });
+  $("streakInfo").textContent=total?"Longest same-side streak in stored sample: "+longest:"Collecting observations.";
+}
+
+function backtestDisplay(){
+  const root=$("strategyRows");
+  root.replaceChildren();
+  STRATEGIES.forEach(([name,fn])=>{
+    const r=backtest(fn),tr=el("tr");
+    tr.append(
+      el("td",name),
+      el("td",r.tests,"center"),
+      el("td",r.tests?Math.round(r.hits/r.tests*100)+"% ±"+margin(r.tests)+"%":"--","center")
+    );
+    root.appendChild(tr);
+  });
+
+  const bt=backtest(x=>analyze(x).side);
+  $("backtest").textContent=bt.tests?
+    "Historical 70% rule: "+Math.round(bt.hits/bt.tests*100)+"% hit rate across "+bt.tests+" eligible tests (approx. ±"+margin(bt.tests)+" percentage points). Not a forecast.":
+    "Not enough stored observations for a historical backtest.";
+}
+
+function renderDiagnostics(){
+  const age=lastSuccess?Math.max(0,Math.floor((Date.now()-lastSuccess)/1000)):null;
+  $("feedAge").textContent=age===null?"NO SUCCESSFUL FETCH":age<60?"UPDATED "+age+"s AGO":"DATA "+Math.floor(age/60)+"m OLD";
+  $("lastUpdate").textContent=lastSuccess?new Date(lastSuccess).toLocaleTimeString():"Never";
+  $("diagCount").textContent=store.length;
+  $("diagPeriod").textContent=results[0]?.issue||"--";
+  $("currentPeriod").textContent=results[0]?.issue||"--";
+  $("nextPeriod").textContent=results[0]?(BigInt(results[0].issue)+1n).toString():"----------------";
+}
+
+function renderSignal(){
+  const latest=results.length?results[0]:null;
+  const analysis=results.length?analyze(results.map(r=>size(r.num))):{side:null,score:0,why:"No live data yet"};
+  const healthy=feedStatus==="LIVE";
+  const side=healthy&&analysis.side?analysis.side:"WAIT";
+  const signal=$("signal");
+  signal.textContent=side;
+  signal.className="signal "+side;
+  $("signalSub").textContent=!healthy?"FEED "+feedStatus+" / NO LIVE SIGNAL":
+    analysis.side?"HEURISTIC THRESHOLD MET / NOT A GUARANTEE":"INSUFFICIENT PATTERN CONCENTRATION";
+
+  $("scoreFill").style.width=Math.round(analysis.score*100)+"%";
+  $("scorePct").textContent=Math.round(analysis.score*100)+"%";
+
+  const tags=$("reasonTags");
+  tags.replaceChildren();
+  [
+    {text:healthy?"FEED VERIFIED":"FEED "+feedStatus,cls:healthy?"good":"warn"},
+    {text:analysis.why,cls:analysis.side?"good":"warn"}
+  ].forEach(t=>tags.appendChild(el("span",t.text,"tag "+t.cls)));
+
+  renderDiagnostics();
+}
+
+function renderAll(){
+  renderSignal();
+  renderHistory();
+  renderFrequency();
+  backtestDisplay();
+  renderStages();
+  renderRisk();
+}
+
+/* =========================================================
+   Three-stage cycle reporting
+========================================================= */
+function cycles(outcomes){
+  const r={n:0,s:[0,0,0],bust:0};
+  let stage=0;
+  for(const won of outcomes){
+    if(won){
+      r.s[stage]++;
+      r.n++;
+      stage=0;
+    }else{
+      stage++;
+      if(stage===3){r.bust++;r.n++;stage=0}
+    }
+  }
+  return r;
+}
+
+function fillStage(root,r){
+  root.replaceChildren();
+  const pct=n=>r.n?Math.round(n/r.n*100)+"%":"--";
+  const wins=r.s.reduce((a,b)=>a+b,0);
+  [
+    ["Finished cycles",r.n],
+    ["Won at stage 1",r.s[0]+" ("+pct(r.s[0])+")"],
+    ["Won at stage 2",r.s[1]+" ("+pct(r.s[1])+")"],
+    ["Won at stage 3",r.s[2]+" ("+pct(r.s[2])+")"],
+    ["Bust: three consecutive losses",r.bust+" ("+pct(r.bust)+")"],
+    ["Won within three stages",wins+" ("+pct(wins)+")"]
+  ].forEach(([label,value])=>{
+    const row=el("div",undefined,"stage-row");
+    row.append(el("span",label),el("b",value));
+    root.appendChild(row);
+  });
+}
+
+function renderStages(){
+  const settled=Object.keys(predictions).sort(cmpIssue).reverse()
+    .filter(k=>predictions[k].res!=="PENDING");
+  fillStage($("stageLive"),cycles(settled.map(k=>predictions[k].res!=="LOSS")));
+
+  const z=store.map(r=>size(r.num));
+  const outcomes=[];
+  for(let i=z.length-11;i>=0;i--){
+    const p=analyze(z.slice(i+1)).side;
+    if(p)outcomes.push(p===z[i]);
+  }
+  fillStage($("stageReplay"),cycles(outcomes));
+
+  const base=Math.max(0,Number($("baseStake").value)||0);
+  const payout=Math.max(0,Number($("stagePayout").value)||0);
+  const stages=[1,2,4].map(mult=>({
+    mult,stake:base*mult,
+    profit:base*mult*(payout-1)-base*(mult-1)
+  }));
+  const lines=[
+    "Stage 1 stake: "+stages[0].stake.toFixed(2)+" | net: "+stages[0].profit.toFixed(2),
+    "Stage 2 stake: "+stages[1].stake.toFixed(2)+" | cumulative net: "+stages[1].profit.toFixed(2),
+    "Stage 3 stake: "+stages[2].stake.toFixed(2)+" | cumulative net: "+stages[2].profit.toFixed(2),
+    "Three losses: -"+(7*base).toFixed(2),
+    "Assuming independent 50/50 outcomes, probability of 3 consecutive losses: 12.5%."
+  ];
+  $("stageCalc").replaceChildren(...lines.map(x=>el("p",x)));
+}
+
+["baseStake","stagePayout"].forEach(id=>$(id).addEventListener("input",renderStages));
+
+/* =========================================================
+   Risk calculations: gross payout includes returned stake.
+========================================================= */
+function renderRisk(){
+  const stake=Number($("riskStake").value);
+  const payout=Number($("riskPayout").value);
+  const bets=Math.floor(Number($("riskBets").value));
+  const root=$("riskOutput");
+  root.replaceChildren();
+
+  if(!Number.isFinite(stake)||stake<0||!Number.isFinite(payout)||payout<0||
+     !Number.isFinite(bets)||bets<0||bets>10000000){
+    root.appendChild(el("p","Enter valid non-negative stake, payout and bet count.","LOSS"));
+    return;
+  }
+  const p=.5;
+  const ev=stake*(p*payout-1);
+  const edge=(p*payout-1)*100;
+  const total=ev*bets;
+  [
+    "Assumed win probability: 50% (illustrative)",
+    "Net profit on a win: "+(stake*(payout-1)).toFixed(2),
+    "Net loss on a loss: -"+stake.toFixed(2),
+    "Expected value per bet: "+(ev>=0?"+":"")+ev.toFixed(2),
+    "Expected value over "+bets+" bets: "+(total>=0?"+":"")+total.toFixed(2),
+    "Theoretical expected return: "+edge.toFixed(2)+"% of stake.",
+    "Actual win probabilities, payouts and fees may differ. Expected value is not a prediction."
+  ].forEach(line=>root.appendChild(el("p",line)));
+}
+
+["riskStake","riskPayout","riskBets"].forEach(id=>$(id).addEventListener("input",renderRisk));
+
+/* =========================================================
+   CSV export
+========================================================= */
+function downloadCSV(filename,rows){
+  const csv=rows.map(row=>row.map(value=>{
+    const s=String(value??"");
+    return '"'+s.replace(/"/g,'""')+'"';
+  }).join(",")).join("\r\n");
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+
+$("exportResults").addEventListener("click",()=>{
+  downloadCSV("bilal-vip-results.csv",[
+    ["issue","number","size","color"],
+    ...store.map(r=>[r.issue,r.num,size(r.num),color(r.num)])
+  ]);
+});
+
+$("exportSignals").addEventListener("click",()=>{
+  downloadCSV("bilal-vip-signals.csv",[
+    ["issue","prediction","score","picks","actual_number","result"],
+    ...Object.keys(predictions).sort(cmpIssue).map(k=>{
+      const p=predictions[k];
+      return [k,p.side,p.score,p.picks.join("|"),p.num??"",p.res];
+    })
+  ]);
+});
+
+$("copyPeriod").addEventListener("click",async()=>{
+  const text=$("nextPeriod").textContent;
+  if(!validIssue(text))return;
+  try{
+    await navigator.clipboard.writeText(text);
+    $("copyPeriod").textContent="✓";
+  }catch(e){
+    const input=document.createElement("textarea");
+    input.value=text;document.body.appendChild(input);
+    input.select();
+    let ok=false;
+    try{ok=document.execCommand("copy")}catch(_){}
+    input.remove();
+    $("copyPeriod").textContent=ok?"✓":"✕";
+  }
+  setTimeout(()=>{$("copyPeriod").textContent="▣"},1200);
+});
+
+$("refresh").addEventListener("click",()=>{
+  clearTimeout(pollTimer);
+  poll();
+});
+$("clearLog").addEventListener("click",()=>$("terminal").replaceChildren());
+$("retry3d").addEventListener("click",()=>{
+  if(three){log("3D engine is already initialized.");return}
+  init3D();
+});
+
+/* =========================================================
+   Countdown: visual clock only, not a verified API timer.
+========================================================= */
+function tick(){
+  const seconds=60-new Date().getUTCSeconds();
+  $("timer").textContent=String(seconds).padStart(2,"0");
+  $("timerArc").style.strokeDashoffset=String(100.53*(1-seconds/60));
+}
+function startClock(){
+  clearInterval(clockTimer);
+  tick();
+  clockTimer=setInterval(tick,1000);
+}
+
+/* =========================================================
+   Sound: generated locally; only enabled by explicit action.
+========================================================= */
+function playTone(frequency=440,duration=.06){
+  if(!soundEnabled)return;
+  try{
+    const C=window.AudioContext||window.webkitAudioContext;
+    if(!C)return;
+    soundContext=soundContext||new C();
+    if(soundContext.state==="suspended")soundContext.resume();
+    const osc=soundContext.createOscillator();
+    const gain=soundContext.createGain();
+    osc.type="sine";
+    osc.frequency.value=frequency;
+    gain.gain.setValueAtTime(.025,soundContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,soundContext.currentTime+duration);
+    osc.connect(gain);gain.connect(soundContext.destination);
+    osc.start();osc.stop(soundContext.currentTime+duration);
+  }catch(e){log("Audio unavailable.","WARN")}
+}
+$("soundToggle").addEventListener("change",()=>{
+  soundEnabled=$("soundToggle").checked;
+  if(soundEnabled)playTone(660,.09);
+});
+
+/* =========================================================
+   Visual preferences
+========================================================= */
+function loadSettings(){
+  try{
+    const s=JSON.parse(localStorage.getItem(STORAGE_SETTINGS)||"{}");
+    if(s&&typeof s==="object"){
+      visualSettings.quality=["low","medium","high"].includes(s.quality)?s.quality:"medium";
+      visualSettings.motion=["low","medium","high"].includes(s.motion)?s.motion:"medium";
+      visualSettings.rain=s.rain!==false;
+      visualSettings.reduce=REDUCED.matches||s.reduce===true;
+    }
+  }catch(e){}
+  $("quality").value=visualSettings.quality;
+  $("motion").value=visualSettings.motion;
+  $("rainToggle").checked=visualSettings.rain;
+  $("reduceToggle").checked=visualSettings.reduce;
+  applySettings();
+}
+
+function saveSettings(){
+  visualSettings.quality=$("quality").value;
+  visualSettings.motion=$("motion").value;
+  visualSettings.rain=$("rainToggle").checked;
+  visualSettings.reduce=REDUCED.matches||$("reduceToggle").checked;
+  try{localStorage.setItem(STORAGE_SETTINGS,JSON.stringify(visualSettings))}catch(e){}
+  applySettings();
+}
+
+function applySettings(){
+  document.documentElement.style.setProperty("--motion",visualSettings.reduce?"0":visualSettings.motion==="low"?"0.35":visualSettings.motion==="high"?"1.35":"1");
+  $("fallback").style.opacity=visualSettings.rain?".7":".2";
+  if(three){
+    const count=visualSettings.quality==="low"?500:visualSettings.quality==="high"?2200:1100;
+    if(particles&&particles.geometry&&particles.geometry.attributes.position.count!==count){
+      rebuildParticles(count);
+    }
+    if(particleMaterial)particleMaterial.opacity=visualSettings.rain?.65:0;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,visualSettings.quality==="high"?1.5:1.15));
+  }
+}
+["quality","motion","rainToggle","reduceToggle"].forEach(id=>$(id).addEventListener("change",saveSettings));
+
+$("resetVisuals").addEventListener("click",()=>{
+  $("quality").value="medium";
+  $("motion").value="medium";
+  $("rainToggle").checked=true;
+  $("reduceToggle").checked=REDUCED.matches;
+  saveSettings();
+});
+
+/* =========================================================
+   Genuine Three.js scene
+   No post-processing dependency: graceful fallback is built in.
+========================================================= */
+function init3D(){
+  if(three||!window.THREE)return;
+  const THREE=window.THREE;
+  const host=$("world");
+
+  try{
+    renderer=new THREE.WebGLRenderer({
+      alpha:true,antialias:visualSettings.quality!=="low",
+      powerPreference:"low-power",failIfMajorPerformanceCaveat:false
+    });
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.25));
+    renderer.setSize(innerWidth,innerHeight);
+    renderer.setClearColor(0x03070b,0);
+    renderer.outputColorSpace=THREE.SRGBColorSpace;
+    renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure=1.05;
+    renderer.domElement.setAttribute("aria-hidden","true");
+    host.replaceChildren(renderer.domElement);
+
+    scene=new THREE.Scene();
+    scene.fog=new THREE.FogExp2(0x03070b,.018);
+    camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,180);
+    camera.position.set(0,3.8,14);
+    camera.lookAt(0,.6,0);
+
+    scene.add(new THREE.AmbientLight(0x3a8b99,.8));
+    const cyanLight=new THREE.PointLight(0x00eaff,24,35);
+    cyanLight.position.set(0,3,1);scene.add(cyanLight);
+    const greenLight=new THREE.PointLight(0x00ff9c,16,30);
+    greenLight.position.set(-6,2,-3);scene.add(greenLight);
+    const redLight=new THREE.PointLight(0xff1744,7,20);
+    redLight.position.set(6,0,-5);scene.add(redLight);
+
+    core=new THREE.Group();
+    scene.add(core);
+    const wireMat=new THREE.MeshStandardMaterial({
+      color:0x00eaff,emissive:0x004b55,emissiveIntensity:1.6,
+      metalness:.75,roughness:.28,wireframe:true
+    });
+    const greenMat=new THREE.MeshStandardMaterial({
+      color:0x00ff9c,emissive:0x004b35,emissiveIntensity:1.5,
+      metalness:.7,roughness:.3,wireframe:true
+    });
+    const goldMat=new THREE.MeshStandardMaterial({
+      color:0xffd76a,emissive:0x614100,emissiveIntensity:1,
+      metalness:.85,roughness:.25,wireframe:true
+    });
+
+    const sphere=new THREE.Mesh(new THREE.IcosahedronGeometry(1.35,2),wireMat);
+    core.add(sphere);
+    const globe=new THREE.Mesh(new THREE.SphereGeometry(1.02,16,12),greenMat);
+    core.add(globe);
+
+    function ring(radius,tube,material,rx,ry,speed){
+      const mesh=new THREE.Mesh(new THREE.TorusGeometry(radius,tube,8,100),material);
+      mesh.rotation.set(rx,ry,0);
+      core.add(mesh);
+      rings.push({mesh,speed,baseX:rx,baseY:ry});
+      return mesh;
+    }
+    ring(1.8,.014,wireMat,Math.PI/2.4,0,.22);
+    ring(2.15,.012,greenMat,Math.PI/3,.5,-.16);
+    ring(2.5,.009,goldMat,Math.PI/2.05,1.1,.11);
+
+    for(let i=0;i<8;i++){
+      const pivot=new THREE.Group();
+      pivot.rotation.y=i*Math.PI/4;
+      const orb=new THREE.Mesh(
+        new THREE.OctahedronGeometry(.10,0),
+        i%2?greenMat:wireMat
+      );
+      orb.position.set(2.85,Math.sin(i)*.2,0);
+      pivot.add(orb);
+      core.add(pivot);
+      orbiters.push({pivot,speed:(i%2?1:-1)*(.12+i*.012)});
+    }
+
+    const floorGeometry=new THREE.PlaneGeometry(90,90,60,60);
+    const floorMaterial=new THREE.MeshBasicMaterial({
+      color:0x00aab5,wireframe:true,transparent:true,opacity:.09
+    });
+    grid=new THREE.Mesh(floorGeometry,floorMaterial);
+    grid.rotation.x=-Math.PI/2;
+    grid.position.set(0,-3.3,-5);
+    scene.add(grid);
+
+    rebuildParticles(visualSettings.quality==="low"?500:visualSettings.quality==="high"?2200:1100);
+    applySettings();
+    three=THREE;
+    $("fallback").hidden=true;
+    log("Three.js WebGL scene initialized.");
+    animate();
+  }catch(e){
+    renderer?.dispose();
+    renderer=null;scene=null;camera=null;core=null;
+    three=null;
+    $("fallback").hidden=false;
+    log("3D unavailable; CSS grid fallback enabled: "+e.message,"WARN");
+  }
+}
+
+function rebuildParticles(count){
+  if(!three||!scene)return;
+  if(particles){
+    scene.remove(particles);
+    particles.geometry.dispose();
+    particleMaterial.dispose();
+  }
+  const positions=new Float32Array(count*3);
+  for(let i=0;i<count;i++){
+    positions[i*3]=(Math.random()-.5)*48;
+    positions[i*3+1]=(Math.random()-.5)*25;
+    positions[i*3+2]=(Math.random()-.5)*40;
+  }
+  const geometry=new three.BufferGeometry();
+  geometry.setAttribute("position",new three.BufferAttribute(positions,3));
+  particleMaterial=new three.PointsMaterial({
+    color:0x00eaff,size:.035,transparent:true,opacity:.65,
+    depthWrite:false,sizeAttenuation:true
+  });
+  particles=new three.Points(geometry,particleMaterial);
+  scene.add(particles);
+}
+
+function animate(){
+  if(!three||!renderer||!scene||!camera||document.hidden||raf)return;
+  const motion=visualSettings.reduce?0:visualSettings.motion==="low"?.35:visualSettings.motion==="high"?1.35:1;
+  const clockStart=performance.now();
+
+  const frame=()=>{
+    raf=0;
+    if(!three||!renderer||document.hidden)return;
+    const t=performance.now()*.001;
+    userMotion.x+=(motionTarget.x-userMotion.x)*.035;
+    userMotion.y+=(motionTarget.y-userMotion.y)*.035;
+
+    if(core){
+      core.position.y=.35+Math.sin(t*.55)*.12*motion;
+      core.rotation.y=t*.12*motion+userMotion.x*.18;
+      core.rotation.x=userMotion.y*.12;
+    }
+    rings.forEach(r=>{
+      r.mesh.rotation.z=t*r.speed*motion;
+      r.mesh.rotation.x=r.baseX+userMotion.y*.04;
+    });
+    orbiters.forEach(o=>o.pivot.rotation.y=t*o.speed*motion);
+    if(particles&&visualSettings.rain){
+      particles.rotation.y=t*.006*motion;
+      particles.rotation.x=Math.sin(t*.04)*.025*motion;
+    }
+    if(grid)grid.position.z=-5+Math.sin(t*.08)*.4*motion;
+
+    camera.position.x=userMotion.x*1.15;
+    camera.position.y=3.8+userMotion.y*.65;
+    camera.lookAt(0,.25,0);
+
+    renderer.render(scene,camera);
+    if(motion===0&&t-clockStart>100000)return;
+    raf=requestAnimationFrame(frame);
+  };
+  raf=requestAnimationFrame(frame);
+}
+
+function resize3D(){
+  if(!renderer||!camera)return;
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+}
+
+window.addEventListener("resize",resize3D,{passive:true});
+
+window.addEventListener("pointermove",e=>{
+  if(e.pointerType==="touch")return;
+  motionTarget.x=(e.clientX/innerWidth-.5)*2;
+  motionTarget.y=(e.clientY/innerHeight-.5)*2;
+},{passive:true});
+
+window.addEventListener("touchstart",e=>{
+  const t=e.touches[0];
+  if(t)touchPoint={x:t.clientX,y:t.clientY};
+},{passive:true});
+window.addEventListener("touchmove",e=>{
+  if(!touchPoint||!e.touches[0])return;
+  const t=e.touches[0];
+  motionTarget.x=Math.max(-1,Math.min(1,motionTarget.x+(t.clientX-touchPoint.x)/innerWidth));
+  motionTarget.y=Math.max(-1,Math.min(1,motionTarget.y+(t.clientY-touchPoint.y)/innerHeight));
+  touchPoint={x:t.clientX,y:t.clientY};
+},{passive:true});
+window.addEventListener("touchend",()=>{touchPoint=null},{passive:true});
+
+document.querySelectorAll(".card").forEach(card=>{
+  card.addEventListener("pointermove",e=>{
+    if(e.pointerType!=="mouse"||visualSettings.reduce||visualSettings.motion==="low")return;
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform="perspective(1000px) rotateX("+(-y*1.2)+"deg) rotateY("+(x*1.2)+"deg) translateZ(2px)";
+  });
+  card.addEventListener("pointerleave",()=>{card.style.transform=""});
+});
+
+/* =========================================================
+   Cinematic intro: once per session; always skippable.
+========================================================= */
+function clearIntroTimers(){introTimers.forEach(clearTimeout);introTimers=[]}
+
+function closeIntro(){
+  clearIntroTimers();
+  $("intro").classList.add("done");
+  try{sessionStorage.setItem("bsv_intro_seen","1")}catch(e){}
+}
+
+function replayIntro(){
+  clearIntroTimers();
+  const intro=$("intro");
+  intro.classList.remove("done");
+  $("introLog").textContent="";
+  $("introProgress").style.width="0%";
+
+  const lines=[
+    "INITIALIZING CYBER CORE...",
+    "ESTABLISHING DATA CONNECTION...",
+    "LOADING DASHBOARD...",
+    "VISUAL SYSTEM READY."
+  ];
+  if(REDUCED.matches||visualSettings.reduce){
+    $("introLog").textContent=lines.join("\n");
+    $("introProgress").style.width="100%";
+    return;
+  }
+  lines.forEach((line,i)=>{
+    introTimers.push(setTimeout(()=>{
+      $("introLog").textContent+=($("introLog").textContent?"\n":"")+"> "+line;
+      $("introProgress").style.width=((i+1)/lines.length*100)+"%";
+      playTone(330+i*90,.025);
+      if(i===lines.length-1)introTimers.push(setTimeout(closeIntro,500));
+    },i*430+150));
+  });
+}
+
+$("skipIntro").addEventListener("click",closeIntro);
+$("replayIntro").addEventListener("click",replayIntro);
+
+$("settingsBtn").addEventListener("click",()=>{
+  document.querySelector('[data-view="toolsView"]').click();
+  $("quality").focus();
+});
+
+$("fullscreen").addEventListener("click",async()=>{
+  try{
+    if(!document.fullscreenElement)await document.documentElement.requestFullscreen();
+    else await document.exitFullscreen();
+  }catch(e){log("Fullscreen unavailable in this browser.","WARN")}
+});
+
+/* If WebGL is unavailable or the external library fails, the dashboard
+   remains usable with the CSS floor-grid fallback. */
+function loadThree(){
+  if(window.THREE){init3D();return}
+  const script=document.createElement("script");
+  script.src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js";
+  script.async=true;
+  script.onload=init3D;
+  script.onerror=()=>{
+    $("fallback").hidden=false;
+    log("Three.js CDN failed. Dashboard remains available in fallback mode.","WARN");
+  };
+  document.head.appendChild(script);
+}
 
 function start(){
- if(started)return;started=true;
- tick();setInterval(tick,1000);render();poll();
-}
-start();
+  if(appStarted)return;
+  appStarted=true;
+  loadStorage();
+  renderAll();
+  startClock();
+  loadThree();
 
-/* ---------- remote popup (Firebase, validated, single subscription) ---------- */
-(function(){
- const CFG={apiKey:"AIzaSyAI3z1Cu-bmwwSgf5eVO3wpQ3PKqGCxDZc",authDomain:"poup-real-time.firebaseapp.com",databaseURL:"https://poup-real-time-default-rtdb.firebaseio.com",projectId:"poup-real-time",storageBucket:"poup-real-time.firebasestorage.app",messagingSenderId:"47044726694",appId:"1:47044726694:web:4d24b6c479a709ef46c967"};
- const HOSTS=["t.me","telegram.me","telegram.dog"]; /* add hosts you trust */
- let timer=null,subscribed=false;
- const load=u=>new Promise((res,rej)=>{const s=document.createElement("script");s.src=u;s.async=true;s.onload=res;s.onerror=rej;document.head.appendChild(s)});
- function safeUrl(v){try{const u=new URL(String(v).trim());return u.protocol==="https:"&&HOSTS.includes(u.hostname)?u.href:null}catch(e){return null}}
- function remove(){clearInterval(timer);timer=null;const o=$("rp");if(o)o.remove()}
- function show(d){
-  const url=safeUrl(d.joinUrl);if(!url||$("rp"))return;
-  let left=Math.min(Math.max(parseInt(d.duration,10)||20,1),120);
-  const o=document.createElement("div");o.id="rp";
-  const c=document.createElement("div");
-  const h=document.createElement("h3");h.textContent=String(d.title||"Official Channel").slice(0,80);
-  const p=document.createElement("p");p.textContent=String(d.message||"Join our official channel for updates.").slice(0,240);
-  const n=document.createElement("p");n.textContent="Closes in "+left+"s";
-  const g=document.createElement("button");g.className="go";g.type="button";g.textContent="JOIN OFFICIAL CHANNEL";
-  const x=document.createElement("button");x.className="x";x.type="button";x.textContent="CLOSE";
-  g.onclick=()=>{remove();window.open(url,"_blank","noopener,noreferrer")};x.onclick=remove;
-  c.append(h,p,n,g,x);o.appendChild(c);document.body.appendChild(o);
-  timer=setInterval(()=>{left--;n.textContent="Closes in "+left+"s";if(left<=0)remove()},1000);
- }
- async function init(){
-  if(subscribed)return;
-  try{
-   if(!window.firebase){await load("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");await load("https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js")}
-   if(!firebase.apps.length)firebase.initializeApp(CFG);
-   subscribed=true;
-   firebase.database().ref("remotePopup").on("value",s=>{const d=s.val();if(d&&d.enabled===true&&typeof d==="object")show(d);else remove()},e=>console.error("Popup read error:",e.message));
-  }catch(e){console.error("Popup unavailable:",e)}
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
-})();
+  let seen=false;
+  try{seen=sessionStorage.getItem("bsv_intro_seen")==="1"}catch(e){}
+  if(seen||REDUCED.matches){
+    $("intro").classList.add("done");
+  }else{
+    replayIntro();
+  }
+  log("Interface ready. Awaiting validated feed data.");
+  poll();
+}
+
+REDUCED.addEventListener?.("change",e=>{
+  if(e.matches){
+    visualSettings.reduce=true;
+    $("reduceToggle").checked=true;
+    applySettings();
+  }
+});
+
+window.addEventListener("pagehide",()=>{
+  clearTimeout(pollTimer);
+  clearInterval(clockTimer);
+  clearIntroTimers();
+  if(raf)cancelAnimationFrame(raf);
+  raf=0;
+  if(renderer){
+    renderer.dispose();
+    renderer.domElement.remove();
+  }
+  if(soundContext&&soundContext.state!=="closed")soundContext.close().catch(()=>{});
+});
+
+start();
 </script>
 </body>
 </html>
