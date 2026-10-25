@@ -64,6 +64,14 @@ nav{pointer-events:auto;width:100%;max-width:420px;display:flex;justify-content:
 #rp div{width:100%;max-width:340px;background:#fff;color:#111;border-radius:22px;padding:24px 20px;text-align:center;display:flex;flex-direction:column;gap:10px}
 #rp h3{font-size:20px}#rp p{color:#555;font-size:14px}#rp button{border:0;border-radius:12px;padding:13px;font-weight:700;cursor:pointer}
 #rp .go{background:#229ed9;color:#fff}#rp .x{background:#eee;color:#444}
+.bars{display:flex;gap:4px;align-items:flex-end;height:90px;margin-top:10px}
+.bar{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-family:var(--mo);font-size:9px;color:var(--mute)}
+.bar i{width:100%;background:linear-gradient(var(--cyan),var(--purple));border-radius:3px 3px 0 0;min-height:2px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.grid label{font-size:11px;color:var(--mute);display:flex;flex-direction:column;gap:4px}
+.grid input{height:40px;border-radius:10px;border:1px solid rgba(0,242,254,.4);background:#000;color:var(--cyan);font-family:var(--mo);text-align:center;width:100%}
+.exp{width:100%;height:44px;border-radius:12px;border:1px solid var(--cyan);background:rgba(0,242,254,.1);color:var(--cyan);font-family:var(--cy);font-size:11px;font-weight:700;cursor:pointer}
+td.l{text-align:left;padding-left:6px;font-family:var(--te);font-size:12px}
 @media (prefers-reduced-motion:reduce){.bg-video{display:none}*{transition:none!important;animation:none!important}}
 @media (max-width:380px){.big{font-size:32px}}
 </style>
@@ -92,7 +100,7 @@ nav{pointer-events:auto;width:100%;max-width:420px;display:flex;justify-content:
 
  <main id="historyView" class="panel on">
   <div class="box">
-   <div class="scroll"><table><thead><tr><th>PRD</th><th>PRED</th><th>NUM</th><th>RES</th></tr></thead><tbody id="rows"></tbody></table>
+   <div class="scroll"><table><thead><tr><th>PRD</th><th>PRED</th><th>NUM</th><th>SCORE</th><th>RES</th></tr></thead><tbody id="rows"></tbody></table>
    <div class="empty" id="empty">No settled or pending signals yet. Signals appear only when live data supports one.</div></div>
    <div class="sum"><span>🏆 <b id="cW" class="WIN">0</b></span><span>💀 <b id="cL" class="LOSS">0</b></span><span>👛 <b id="cJ" class="JACKPOT">0</b></span><span>📊 <b id="cT">0</b></span></div>
   </div>
@@ -111,8 +119,18 @@ nav{pointer-events:auto;width:100%;max-width:420px;display:flex;justify-content:
   </div>
  </section>
 
- <section id="gameView" class="panel"><div class="box"><div class="ttl">DATA SOURCE</div>
-  <div class="note">This viewer reads the live WinGo 1M history. If the feed cannot be reached it shows OFFLINE or STALE and makes no signal. It never invents results.</div></div></section>
+ <section id="gameView" class="panel">
+  <div class="box"><div class="ttl">DATA &amp; STATS</div><div class="note" id="tStats"></div>
+   <div class="bars" id="tBars" aria-label="Number frequency"></div><div class="note" id="tStreak"></div></div>
+  <div class="box"><div class="ttl">STRATEGY CHECK</div>
+   <table><thead><tr><th>RULE</th><th>TESTS</th><th>HIT %</th></tr></thead><tbody id="tStrat"></tbody></table>
+   <div class="note">Hit % has a margin of error. Every rule stays near 50%, and the gaps are noise, not skill.</div></div>
+  <div class="box"><div class="ttl">RISK CALCULATOR</div>
+   <div class="grid"><label>Stake<input id="rS" type="number" value="100" min="1"></label><label>Payout x<input id="rP" type="number" value="1.96" step="0.01" min="1"></label><label>Bets<input id="rN" type="number" value="100" min="1"></label></div>
+   <div class="note" id="rOut"></div></div>
+  <div class="box"><button class="exp" id="csv" type="button">EXPORT HISTORY (CSV)</button>
+   <div class="note">Source: live WinGo 1M feed. If unreachable the app shows OFFLINE or STALE and never invents results.</div></div>
+ </section>
 
  <section id="profileView" class="panel"><div class="box" style="text-align:center">
   <div class="ttl">VIP PROFILE</div>
@@ -125,7 +143,7 @@ nav{pointer-events:auto;width:100%;max-width:420px;display:flex;justify-content:
  <button class="nb" data-t="homeView" type="button"><span>🏠</span><span>HOME</span></button>
  <button class="nb on" data-t="historyView" type="button"><span>↻</span><span>HISTORY</span></button>
  <button class="nb mid" data-t="homeView" type="button" aria-label="Open signal"><span>⚡</span><span style="font-size:7px">SIGNAL</span></button>
- <button class="nb" data-t="gameView" type="button"><span>📡</span><span>SOURCE</span></button>
+ <button class="nb" data-t="gameView" type="button"><span>🧰</span><span>TOOLS</span></button>
  <button class="nb" data-t="profileView" type="button"><span>👤</span><span>PROFILE</span></button>
 </nav></div>
 
@@ -136,7 +154,14 @@ const API="https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json
 /* UI gate only: a frontend key is NOT real security. Use Firebase Auth or a server for real access control. */
 const AUTH_KEY="REAL";
 let results=[],preds={},status="CONNECTING",fails=0,inflight=false,pollT=null,started=false,lastSig="";
+let store=[];
 try{preds=JSON.parse(localStorage.getItem("bsv_preds")||"{}")||{}}catch(e){preds={}}
+try{store=JSON.parse(localStorage.getItem("bsv_res")||"[]")||[]}catch(e){store=[]}
+function merge(){
+ const m=new Map(store.map(r=>[r.issue,r]));results.forEach(r=>m.set(r.issue,r));
+ store=[...m.values()].sort((a,b)=>BigInt(b.issue)>BigInt(a.issue)?1:-1).slice(0,300);
+ try{localStorage.setItem("bsv_res",JSON.stringify(store))}catch(e){}
+}
 
 /* ---------- login ---------- */
 function unlock(){
@@ -177,11 +202,14 @@ async function fetchHistory(){
   return out;
  }finally{clearTimeout(t)}
 }
-function schedule(){clearTimeout(pollT);pollT=setTimeout(poll,Math.min(3000*2**fails,30000))}
+function schedule(){
+ clearTimeout(pollT);const sec=new Date().getUTCSeconds(),base=(sec<=6||sec>=58)?1500:10000;
+ pollT=setTimeout(poll,Math.min(base*2**fails,30000));
+}
 async function poll(){
  if(inflight||document.hidden){schedule();return}
  inflight=true;
- try{results=await fetchHistory();fails=0;setStatus("LIVE");settle();ensureSignal()}
+ try{results=await fetchHistory();merge();fails=0;setStatus("LIVE");settle();ensureSignal()}
  catch(e){fails++;setStatus(results.length?"STALE":"OFFLINE",e.name==="AbortError"?"Request timed out":e.message)}
  finally{inflight=false;render();schedule()}
 }
@@ -196,18 +224,23 @@ function analyze(sizes){
  const b=w.filter(x=>x==="BIG").length,score=Math.max(b,10-b)/10,side=b>=5?"BIG":"SMALL";
  return score>=.7?{side,score,why:"Last 10: "+b+" BIG / "+(10-b)+" SMALL"}:{side:null,score,why:"No strong lean ("+Math.round(score*100)+"% < 70%)"};
 }
-function backtest(){
- const s=results.map(r=>size(r.num));let n=0,h=0;
- for(let i=0;i+11<=s.length;i++){const a=analyze(s.slice(i+1));if(a.side){n++;if(a.side===s[i])h++}}
+function backtest(fn){
+ fn=fn||(x=>analyze(x).side);
+ const z=store.map(r=>size(r.num));let n=0,h=0;
+ for(let i=0;i+11<=z.length;i++){const p=fn(z.slice(i+1));if(p){n++;if(p===z[i])h++}}
  return{n,h};
 }
+const moe=n=>n?Math.round(196*Math.sqrt(.25/n)):0;
+const flip=x=>x==="BIG"?"SMALL":"BIG";
+const maj=x=>{const w=x.slice(0,10);if(w.length<10)return null;return w.filter(v=>v==="BIG").length>=5?"BIG":"SMALL"};
+const STRATS=[["Follow majority of 10",maj],["Reverse majority of 10",x=>{const m=maj(x);return m&&flip(m)}],["Follow last result",x=>x[0]],["Reverse last result",x=>flip(x[0])],["Signal rule (70% lean)",x=>analyze(x).side]];
 function picks(side){const p=(side==="BIG"?[5,6,7,8,9]:[0,1,2,3,4]).sort(()=>Math.random()-.5);return[p[0],p[1]]}
 function ensureSignal(){
  if(!results.length)return;
  const next=String(BigInt(results[0].issue)+1n);
  if(preds[next])return;
  const a=analyze(results.map(r=>size(r.num)));
- if(a.side)preds[next]={side:a.side,picks:picks(a.side),res:"PENDING",num:null};
+ if(a.side)preds[next]={side:a.side,score:a.score,picks:picks(a.side),res:"PENDING",num:null};
  save();
 }
 function settle(){
@@ -238,7 +271,7 @@ function render(){
  for(const k of keys){
   const p=preds[k];if(p.res==="WIN")W++;else if(p.res==="LOSS")L++;else if(p.res==="JACKPOT")J++;
   const tr=document.createElement("tr");
-  [[k.slice(-4),""],[p.side,p.side+"-t"],[p.num===null?p.picks.join(","):String(p.num),""],[p.res,p.res]].forEach(([t,c])=>{
+  [[k.slice(-4),""],[p.side,p.side+"-t"],[p.num===null?p.picks.join(","):String(p.num),""],[p.score?Math.round(p.score*100)+"%":"--",""],[p.res,p.res]].forEach(([t,c])=>{
    const td=document.createElement("td");td.textContent=t;if(c)td.className=c;tr.appendChild(td)});
   tb.appendChild(tr);
  }
@@ -254,12 +287,39 @@ function render(){
  [stale?"Feed "+status+": no signal":a.why].forEach(t=>{const e=document.createElement("span");e.className="tag";e.textContent=t;why.appendChild(e)});
  const cur=preds[next];$("picks").textContent=cur&&!stale?cur.picks.join(", "):"--";
  const bt=backtest();
- $("backtest").textContent=bt.n?"Rule check on loaded history: "+bt.h+"/"+bt.n+" correct (small sample, not proof)":"Rule check: not enough history yet";
+ $("backtest").textContent=bt.n?"Measured hit rate of this rule: "+Math.round(bt.h/bt.n*100)+"% ±"+moe(bt.n)+"% over "+bt.n+" past signals (not a win probability)":"Measured hit rate: not enough history yet";
+ renderTools();
  const c=results.slice(0,12).map(r=>color(r.num)),bd=$("badges");bd.textContent="";
  const d=dragon(c),z=zigzag(c);
  if(d){const e=document.createElement("span");e.className="tag dragon";e.textContent="🐉 Dragon "+d+d+d+" (info only)";bd.appendChild(e)}
  if(z){const e=document.createElement("span");e.className="tag zig";e.textContent="⚡ Zigzag "+z+" (info only)";bd.appendChild(e)}
 }
+
+/* ---------- tools ---------- */
+function cell(tr,t,c){const td=document.createElement("td");td.textContent=t;if(c)td.className=c;tr.appendChild(td)}
+function renderTools(){
+ const n=store.length,B=store.filter(r=>r.num>=5).length;
+ $("tStats").textContent=n?"Stored results: "+n+" | BIG "+Math.round(B/n*100)+"% | SMALL "+Math.round((n-B)/n*100)+"%":"Collecting data. Keep this page open to build history.";
+ const cnt=Array(10).fill(0);store.forEach(r=>cnt[r.num]++);
+ const mx=Math.max(1,...cnt),bars=$("tBars");bars.textContent="";
+ cnt.forEach((c,i)=>{const d=document.createElement("div");d.className="bar";const b=document.createElement("i");b.style.height=(c/mx*100)+"%";const l=document.createElement("span");l.textContent=i+":"+c;d.append(b,l);bars.appendChild(d)});
+ let best=0,run=0,prev="";[...store].reverse().forEach(r=>{const z=size(r.num);run=z===prev?run+1:1;prev=z;best=Math.max(best,run)});
+ $("tStreak").textContent=n?"Longest same-side streak stored: "+best:"";
+ const tb=$("tStrat");tb.textContent="";
+ STRATS.forEach(([name,fn])=>{const r=backtest(fn),tr=document.createElement("tr");
+  cell(tr,name,"l");cell(tr,String(r.n));cell(tr,r.n?Math.round(r.h/r.n*100)+"% ±"+moe(r.n):"--");tb.appendChild(tr)});
+ calcRisk();
+}
+function calcRisk(){
+ const st=+$("rS").value||0,pay=+$("rP").value||0,N=Math.floor(+$("rN").value)||0;
+ const ev=st*(.5*pay)-st,edge=(.5*pay-1)*100;
+ $("rOut").textContent="At a fair 50% chance: expected "+(ev>=0?"+":"")+ev.toFixed(2)+" per bet ("+edge.toFixed(1)+"%), "+(ev*N>=0?"+":"")+(ev*N).toFixed(0)+" over "+N+" bets. A chasing system after 5 losses in a row (chance "+(100/32).toFixed(1)+"%) needs a stake of "+(st*32)+". A negative edge cannot be beaten by any signal.";
+}
+["rS","rP","rN"].forEach(id=>$(id).addEventListener("input",calcRisk));
+$("csv").onclick=()=>{
+ const rows=["issue,number,size"].concat(store.map(r=>r.issue+","+r.num+","+size(r.num)));
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv"}));a.download="bilal-sir-vip-results.csv";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+};
 
 /* ---------- countdown (text only, UTC) ---------- */
 function tick(){$("timer").textContent=String(60-new Date().getUTCSeconds()).padStart(2,"0")}
